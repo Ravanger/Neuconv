@@ -1,9 +1,9 @@
 module.exports = {
   siteMetadata: {
-    title: `Title of app`,
-    description: `Description goes here.`,
-    author: `Author`,
-    siteUrl: `https://site.url`,
+    title: `Currency Converter`,
+    description: `A minimalistic currency converter.`,
+    author: `Boris Rossovsky`,
+    siteUrl: `https://www.borisr.dev`,
   },
   plugins: [
     `gatsby-plugin-preact`,
@@ -12,13 +12,23 @@ module.exports = {
     `gatsby-plugin-catch-links`,
     `gatsby-plugin-robots-txt`,
     `gatsby-plugin-netlify`,
-    `gatsby-plugin-styled-components`,
+    `gatsby-plugin-emotion`,
     `gatsby-plugin-sharp`,
     `gatsby-transformer-sharp`,
     {
+      resolve: `gatsby-alias-imports`,
+      options: {
+        aliases: {
+          '@components': `src/components`,
+          '@pages': `src/pages`,
+        },
+        rootFolder: `src`,
+      },
+    },
+    {
       resolve: `gatsby-plugin-canonical-urls`,
       options: {
-        siteUrl: `https://site.url`,
+        siteUrl: `https://www.borisr.dev`,
       },
     },
     {
@@ -51,13 +61,13 @@ module.exports = {
         icon: `src/images/gatsby-icon.png`,
       },
     },
-    {
-      resolve: `gatsby-plugin-offline`,
-      options: {
-        workboxConfig: {
-          globPatterns: ["**/*.{js,jsx,jpg,png,html,css}"],
-        },
-      },
-    },
+    // {
+    //   resolve: `gatsby-plugin-offline`,
+    //   options: {
+    //     workboxConfig: {
+    //       globPatterns: ['**/*.{js,jsx,jpg,png,html,css}'],
+    //     },
+    //   },
+    // },
   ],
 }
