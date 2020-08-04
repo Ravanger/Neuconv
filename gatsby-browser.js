@@ -1,7 +1,3 @@
-/**
- * Implement Gatsby's Browser APIs in this file.
- *
- * See: https://www.gatsbyjs.org/docs/browser-apis/
- */
-
-// You can delete this file if you're not using it
+import './src/style/reset.css'
+import 'purecss/build/grids-min.css'
+import 'purecss/build/grids-responsive-min.css'
