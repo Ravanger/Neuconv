@@ -21,6 +21,7 @@ module.exports = {
         aliases: {
           '@components': `src/components`,
           '@pages': `src/pages`,
+          '@hooks': `src/hooks`,
         },
         rootFolder: `src`,
       },
