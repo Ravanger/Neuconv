@@ -15,7 +15,9 @@ const defaultProps = {
   meta: [],
 }
 
-const SEO: React.FC<PropTypes> = ({ description, lang, meta, title }) => {
+const SEO: React.FC<PropTypes> = props => {
+  const { description, lang, meta, title } = props
+
   const { site } = useStaticQuery(
     graphql`
       query {
