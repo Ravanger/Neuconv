@@ -1,12 +1,9 @@
 import React from 'react'
 
-import Header from '@components/Header'
+type PropTypes = {
+  children: React.ReactNode
+}
 
-const Layout: React.FC = ({ children }) => (
-  <>
-    <Header />
-    <main>{children}</main>
-  </>
-)
+const Layout: React.FC<PropTypes> = ({ children }) => <main>{children}</main>
 
 export default Layout
