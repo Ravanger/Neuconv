@@ -30,12 +30,16 @@ const useFetch = (props: UseFetchPropTypes): UseFetchReturnTypes => {
   const [errorMessage, setErrorMessage] = useState('')
 
   useEffect(() => {
+    // Controller to cancel fetch on unmount
+    const controller = new AbortController()
+
     const fetchData = async () => {
       setIsLoading(true)
       try {
         const response = await fetch(url, {
           method: method,
           body: JSON.stringify(bodyData),
+          signal: controller.signal,
         })
         const result = await response.json()
         if (response.ok) {
@@ -52,7 +56,15 @@ const useFetch = (props: UseFetchPropTypes): UseFetchReturnTypes => {
         setIsLoading(false)
       }
     }
-    fetchData()
+
+    if (!isLoading) {
+      fetchData()
+    }
+
+    return () => {
+      // Cancel fetch request
+      controller.abort()
+    }
   }, [])
 
   return { data, isLoading, hasError, errorMessage }
