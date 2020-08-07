@@ -3,6 +3,7 @@ import styled from '@emotion/styled'
 
 import Layout from '@components/Layout'
 import SEO from '@components/SEO'
+import Input from '@components/Input'
 
 const FormConverter = styled.form`
   position: relative;
@@ -37,6 +38,10 @@ const IndexPage: React.FC = () => {
   })
 
   const handleChange = (event: React.ChangeEvent<HTMLInputElement>) => {
+    if (event.target.value.length > event.target.maxLength) {
+      event.target.value = event.target.value.slice(0, event.target.maxLength)
+    }
+
     setStateConvert({
       ...stateConvert,
       convertTo: +event.target.value,
@@ -51,22 +56,8 @@ const IndexPage: React.FC = () => {
         description="A minimalistic currency converter"
       />
       <FormConverter method="post" className="pure-g">
-        <input
-          type="number"
-          className="pure-u-1"
-          onChange={handleChange}
-          value={stateConvert.convertFrom}
-          name="convertFrom"
-          placeholder="0"
-        />
-        <input
-          type="number"
-          className="pure-u-1"
-          onChange={handleChange}
-          value={stateConvert.convertTo}
-          name="convertTo"
-          placeholder="0"
-        />
+        <Input value={stateConvert.convertFrom} handleChange={handleChange} />
+        <Input value={stateConvert.convertTo} handleChange={handleChange} />
       </FormConverter>
     </Layout>
   )
