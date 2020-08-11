@@ -28,8 +28,8 @@ const FormConverter = styled.form`
 
 const IndexPage: React.FC = () => {
   type StateTypes = {
-    convertFrom: number | undefined
-    convertTo: number | undefined
+    convertFrom: string | undefined
+    convertTo: string | undefined
   }
 
   const [stateConvert, setStateConvert] = useState<StateTypes>({
@@ -37,16 +37,27 @@ const IndexPage: React.FC = () => {
     convertTo: undefined,
   })
 
-  const handleChange = (event: React.ChangeEvent<HTMLInputElement>) => {
+  const handleChange = (event: React.ChangeEvent<HTMLInputElement>): void => {
     if (event.target.value.length > event.target.maxLength) {
       event.target.value = event.target.value.slice(0, event.target.maxLength)
     }
 
-    setStateConvert({
-      ...stateConvert,
-      convertTo: +event.target.value,
-      convertFrom: +event.target.value,
-    })
+    const exp = /^[0-9\b]+$/
+    if (
+      event.target.validity.valid &&
+      (event.target.value === '' || exp.test(event.target.value))
+    ) {
+      setStateConvert({
+        ...stateConvert,
+        [event.target.name]: event.target.value,
+      })
+    }
+  }
+
+  const handleKeyPress = event => {
+    const keyCode = event.keyCode || event.which
+    const keyValue = String.fromCharCode(keyCode)
+    if (/\+|-/.test(keyValue)) event.preventDefault()
   }
 
   return (
@@ -56,8 +67,18 @@ const IndexPage: React.FC = () => {
         description="A minimalistic currency converter"
       />
       <FormConverter method="post" className="pure-g">
-        <Input value={stateConvert.convertFrom} handleChange={handleChange} />
-        <Input value={stateConvert.convertTo} handleChange={handleChange} />
+        <Input
+          value={stateConvert.convertFrom}
+          name="convertFrom"
+          handleChange={handleChange}
+          handleKeyPress={handleKeyPress}
+        />
+        <Input
+          value={stateConvert.convertTo}
+          name="convertTo"
+          handleChange={handleChange}
+          handleKeyPress={handleKeyPress}
+        />
       </FormConverter>
     </Layout>
   )
