@@ -10,7 +10,7 @@ type InputProps = {
 }
 
 const StyledInput = styled(MaskedInput)`
-  display: block;
+  display: inline-block;
   margin: 0 auto;
   margin-bottom: 0.5rem;
 `
