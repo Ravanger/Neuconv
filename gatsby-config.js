@@ -6,12 +6,10 @@ module.exports = {
     siteUrl: `https://www.borisr.dev`,
   },
   plugins: [
-    `gatsby-plugin-preact`,
     `gatsby-plugin-react-helmet`,
     `gatsby-plugin-sitemap`,
     `gatsby-plugin-catch-links`,
     `gatsby-plugin-robots-txt`,
-    `gatsby-plugin-netlify`,
     `gatsby-plugin-emotion`,
     `gatsby-plugin-sharp`,
     `gatsby-transformer-sharp`,
