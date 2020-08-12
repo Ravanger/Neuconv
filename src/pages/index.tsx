@@ -6,21 +6,16 @@ import SEO from '@components/SEO'
 import Input from '@components/Input'
 
 const FormConverter = styled.form`
-  position: relative;
-  max-width: 12rem;
-  margin: 0 auto;
-  top: 50vh;
-
-  input {
-    margin-bottom: 0.5rem;
-  }
+  position: absolute;
+  left: 50%;
+  top: 50%;
+  transform: translate(-50%, -50%);
 
   input::-webkit-outer-spin-button,
   input::-webkit-inner-spin-button {
     -webkit-appearance: none;
     margin: 0;
   }
-
   input[type='number'] {
     -moz-appearance: textfield;
   }
@@ -28,8 +23,8 @@ const FormConverter = styled.form`
 
 const IndexPage: React.FC = () => {
   type StateTypes = {
-    convertFrom: string | undefined
-    convertTo: string | undefined
+    convertFrom: number | undefined
+    convertTo: number | undefined
   }
 
   const [stateConvert, setStateConvert] = useState<StateTypes>({
@@ -38,26 +33,10 @@ const IndexPage: React.FC = () => {
   })
 
   const handleChange = (event: React.ChangeEvent<HTMLInputElement>): void => {
-    if (event.target.value.length > event.target.maxLength) {
-      event.target.value = event.target.value.slice(0, event.target.maxLength)
-    }
-
-    const exp = /^[0-9\b]+$/
-    if (
-      event.target.validity.valid &&
-      (event.target.value === '' || exp.test(event.target.value))
-    ) {
-      setStateConvert({
-        ...stateConvert,
-        [event.target.name]: event.target.value,
-      })
-    }
-  }
-
-  const handleKeyPress = event => {
-    const keyCode = event.keyCode || event.which
-    const keyValue = String.fromCharCode(keyCode)
-    if (/\+|-/.test(keyValue)) event.preventDefault()
+    setStateConvert({
+      ...stateConvert,
+      [event.target.name]: event.target.value,
+    })
   }
 
   return (
@@ -66,18 +45,16 @@ const IndexPage: React.FC = () => {
         title="Currency Converter"
         description="A minimalistic currency converter"
       />
-      <FormConverter method="post" className="pure-g">
+      <FormConverter method="post">
         <Input
           value={stateConvert.convertFrom}
           name="convertFrom"
-          handleChange={handleChange}
-          handleKeyPress={handleKeyPress}
+          onChange={handleChange}
         />
         <Input
           value={stateConvert.convertTo}
           name="convertTo"
-          handleChange={handleChange}
-          handleKeyPress={handleKeyPress}
+          onChange={handleChange}
         />
       </FormConverter>
     </Layout>

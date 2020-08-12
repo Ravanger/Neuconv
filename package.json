@@ -25,11 +25,14 @@
     "react": "^16.13.1",
     "react-dom": "^16.13.1",
     "react-helmet": "^6.1.0",
-    "react-icons": "^3.10.0"
+    "react-icons": "^3.10.0",
+    "react-text-mask": "^5.4.3",
+    "text-mask-addons": "^3.8.0"
   },
   "devDependencies": {
     "@hot-loader/react-dom": "^16.13.0",
     "@types/react-helmet": "^6.1.0",
+    "@types/react-text-mask": "^5.4.6",
     "gatsby-alias-imports": "^1.0.4",
     "prettier": "2.0.5",
     "typescript": "^3.9.7"
