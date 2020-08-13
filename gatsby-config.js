@@ -4,7 +4,6 @@ module.exports = {
     description: 'A minimalistic currency converter.',
     author: 'Boris Rossovsky',
     siteUrl: 'https://www.borisr.dev',
-    apiUrl: 'https://api.ratesapi.io/api/latest',
   },
   plugins: [
     'gatsby-plugin-react-helmet',

@@ -32,18 +32,7 @@ const FormConverter = styled.form`
 `
 
 const IndexPage: React.FC = () => {
-  const apiUrlData = useStaticQuery(
-    graphql`
-      query {
-        site {
-          siteMetadata {
-            apiUrl
-          }
-        }
-      }
-    `
-  )
-  const apiUrl: RequestInfo = apiUrlData.site.siteMetadata.apiUrl
+  const apiUrl: RequestInfo = process.env.GATSBY_API_URL as RequestInfo
 
   type StateTypes = {
     convertFromValue: number | undefined
