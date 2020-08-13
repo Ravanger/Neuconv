@@ -1,8 +1,6 @@
 import React, { useState } from 'react'
-import { useStaticQuery, graphql } from 'gatsby'
+import useSWR, { SWRConfig } from 'swr'
 import styled from '@emotion/styled'
-
-import useFetch from '@hooks/useFetch'
 
 import Layout from '@components/Layout'
 import SEO from '@components/SEO'
@@ -49,16 +47,9 @@ const IndexPage: React.FC = () => {
   })
 
   let currencyNamesArray: string[] = []
-  const { data, isLoading, hasError, errorMessage } = useFetch({
-    url: apiUrl,
-  })
-  if (hasError) {
-    console.error(errorMessage)
-  } else {
-    currencyNamesArray = data && Object.keys(data.rates)
-    currencyNamesArray && currencyNamesArray.push(data.base) //Add base
-    currencyNamesArray && currencyNamesArray.sort()
-  }
+  // currencyNamesArray = data && Object.keys(data.rates)
+  // currencyNamesArray && currencyNamesArray.push(data.base) //Add base
+  // currencyNamesArray && currencyNamesArray.sort()
 
   const handleChange = (
     event: React.ChangeEvent<HTMLInputElement | HTMLSelectElement>
@@ -67,9 +58,12 @@ const IndexPage: React.FC = () => {
       ...stateConvert,
       [event.target.name]: event.target.value,
     })
+    if (event.target.name === 'convertFromValue') {
+    } else if (event.target.name === 'convertToValue') {
+    }
   }
 
-  return isLoading || !currencyNamesArray ? (
+  return !currencyNamesArray ? (
     <p>Loading...</p>
   ) : (
     <Layout>
