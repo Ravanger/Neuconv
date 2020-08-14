@@ -43,8 +43,8 @@ module.exports = {
     {
       resolve: 'gatsby-plugin-manifest',
       options: {
-        name: 'default-starter',
-        short_name: 'starter',
+        name: 'Minimalistic Currency Converter',
+        short_name: 'Currency Converter',
         start_url: '/',
         background_color: '#663399',
         theme_color: '#663399',
