@@ -53,11 +53,25 @@ const FormConverter = styled.form`
   }
 `
 
-const fetcher = (url: RequestInfo) =>
+const fetchData = (url: RequestInfo): Promise<any> =>
   fetch(url).then(response => response.json())
 
 const IndexPage: React.FC = () => {
-  const apiUrl: RequestInfo = process.env.GATSBY_API_URL as RequestInfo
+  const apiUrl: string | null =
+    process.env.GATSBY_API_URL && process.env.GATSBY_API_URL.length > 0
+      ? (process.env.GATSBY_API_URL as string)
+      : null
+  const { data, error } = useSWR(apiUrl, {
+    fetcher: fetchData,
+    revalidateOnFocus: false,
+    revalidateOnReconnect: false,
+    refreshInterval: 86400, //24 hours
+  })
+
+  let currencyNamesArray: string[] = []
+  currencyNamesArray = data && Object.keys(data.rates)
+  currencyNamesArray && currencyNamesArray.push(data.base) //Add base
+  currencyNamesArray && currencyNamesArray.sort()
 
   type StateTypes = {
     convertFromValue: number | undefined
@@ -73,11 +87,6 @@ const IndexPage: React.FC = () => {
     convertToCurrency: 'CAD',
   })
 
-  let currencyNamesArray: string[] = []
-  // currencyNamesArray = data && Object.keys(data.rates)
-  // currencyNamesArray && currencyNamesArray.push(data.base) //Add base
-  // currencyNamesArray && currencyNamesArray.sort()
-
   const handleChange = (
     event: React.ChangeEvent<HTMLInputElement | HTMLSelectElement>
   ): void => {
@@ -90,9 +99,15 @@ const IndexPage: React.FC = () => {
     }
   }
 
-  return !currencyNamesArray ? (
-    <p>Loading...</p>
-  ) : (
+  if (!currencyNamesArray) {
+    return <p>Loading...</p>
+  }
+
+  if (error) {
+    return <p>{error}</p>
+  }
+
+  return (
     <Layout>
       <SEO
         title="Currency Converter"
