@@ -15,17 +15,32 @@ const FormConverter = styled.form`
   width: 100%;
   text-align: center;
 
-  label {
-    display: block;
+  div {
+    display: flex;
+    justify-content: center;
+    margin: 1rem;
   }
 
-  input::-webkit-outer-spin-button,
-  input::-webkit-inner-spin-button {
-    -webkit-appearance: none;
-    margin: 0;
+  input,
+  select {
+    padding: 1em;
+    border: thin solid gray;
   }
-  input[type='number'] {
-    -moz-appearance: textfield;
+
+  input {
+    border-right: none;
+    border-radius: 0.75rem 0 0 0.75rem;
+  }
+
+  select {
+    border-left: none;
+    border-radius: 0 0.75rem 0.75rem 0;
+  }
+
+  @media (max-width: 14em) {
+    * {
+      font-size: 75%;
+    }
   }
 `
 
@@ -72,7 +87,7 @@ const IndexPage: React.FC = () => {
         description="A minimalistic currency converter"
       />
       <FormConverter method="post">
-        <label>
+        <div>
           <Input
             value={stateConvert.convertFromValue}
             name="convertFromValue"
@@ -84,8 +99,8 @@ const IndexPage: React.FC = () => {
             value={stateConvert.convertFromCurrency}
             onChange={handleChange}
           />
-        </label>
-        <label>
+        </div>
+        <div>
           <Input
             value={stateConvert.convertToValue}
             name="convertToValue"
@@ -97,7 +112,7 @@ const IndexPage: React.FC = () => {
             value={stateConvert.convertToCurrency}
             onChange={handleChange}
           />
-        </label>
+        </div>
       </FormConverter>
     </Layout>
   )

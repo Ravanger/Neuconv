@@ -1,5 +1,4 @@
 import React from 'react'
-import styled from '@emotion/styled'
 import MaskedInput from 'react-text-mask'
 import createNumberMask from 'text-mask-addons/dist/createNumberMask'
 
@@ -8,12 +7,6 @@ type InputProps = {
   name: string
   onChange?: (event: React.ChangeEvent<HTMLInputElement>) => void
 }
-
-const StyledInput = styled(MaskedInput)`
-  display: inline-block;
-  margin: 0 auto;
-  margin-bottom: 0.5rem;
-`
 
 const defaultMaskOptions = {
   prefix: '',
@@ -28,7 +21,7 @@ const currencyMask = createNumberMask(defaultMaskOptions)
 
 const Input = (props: InputProps): JSX.Element => {
   return (
-    <StyledInput
+    <MaskedInput
       {...props}
       mask={currencyMask}
       inputMode="decimal"
