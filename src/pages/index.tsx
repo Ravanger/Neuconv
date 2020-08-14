@@ -35,6 +35,15 @@ const FormConverter = styled.form`
   select {
     border-left: none;
     border-radius: 0 0.75rem 0.75rem 0;
+    appearance: none;
+    background-image: linear-gradient(gray, gray),
+      linear-gradient(-135deg, transparent 50%, white 50%),
+      linear-gradient(-225deg, transparent 50%, white 50%),
+      linear-gradient(white 42%, gray 42%);
+    background-repeat: no-repeat;
+    background-size: 1px 100%, 1rem 2.5rem, 1rem 2.5rem, 1rem 100%;
+    background-position: right 1rem center, right bottom, right bottom,
+      right bottom;
   }
 
   @media (max-width: 14em) {
@@ -43,6 +52,9 @@ const FormConverter = styled.form`
     }
   }
 `
+
+const fetcher = (url: RequestInfo) =>
+  fetch(url).then(response => response.json())
 
 const IndexPage: React.FC = () => {
   const apiUrl: RequestInfo = process.env.GATSBY_API_URL as RequestInfo
