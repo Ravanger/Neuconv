@@ -2,6 +2,7 @@ import React, { useState } from 'react'
 import useSWR, { SWRConfig } from 'swr'
 import styled from '@emotion/styled'
 
+import useLocalStorage from '@hooks/useLocalStorage'
 import Layout from '@components/Layout'
 import SEO from '@components/SEO'
 import Input from '@components/Input'
@@ -56,17 +57,33 @@ const FormConverter = styled.form`
 const fetchData = (url: RequestInfo): Promise<any> =>
   fetch(url).then(response => response.json())
 
+const areRatesUpToDate = (ratesData: any) => {
+  if (!ratesData || ratesData.length < 1) {
+    return false
+  }
+  return true
+  // ratesData.date
+}
+
 const IndexPage: React.FC = () => {
+  const [ratesData, setRatesdata] = useLocalStorage('data', '')
+
   const apiUrl: string | null =
-    process.env.GATSBY_API_URL && process.env.GATSBY_API_URL.length > 0
+    !areRatesUpToDate(ratesData) &&
+    process.env.GATSBY_API_URL &&
+    process.env.GATSBY_API_URL.length > 0
       ? (process.env.GATSBY_API_URL as string)
       : null
-  const { data, error } = useSWR(apiUrl, {
+
+  let { data, error } = useSWR(apiUrl, {
     fetcher: fetchData,
     revalidateOnFocus: false,
     revalidateOnReconnect: false,
-    refreshInterval: 86400, //24 hours
   })
+  data && setRatesdata(data)
+  if (!apiUrl) {
+    data = ratesData
+  }
 
   let currencyNamesArray: string[] = []
   currencyNamesArray = data && Object.keys(data.rates)
@@ -99,12 +116,12 @@ const IndexPage: React.FC = () => {
     }
   }
 
-  if (!currencyNamesArray) {
+  if (!currencyNamesArray || currencyNamesArray.length < 1) {
     return <p>Loading...</p>
   }
 
-  if (error) {
-    return <p>{error}</p>
+  if (error && error.length > 0) {
+    return <p>{`Error: ${error}`}</p>
   }
 
   return (
