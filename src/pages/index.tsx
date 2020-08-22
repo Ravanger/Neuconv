@@ -54,15 +54,34 @@ const FormConverter = styled.form`
   }
 `
 
+const UPDATE_DAYS = 1
+
 const fetchData = (url: RequestInfo): Promise<any> =>
   fetch(url).then(response => response.json())
 
+// https://stackoverflow.com/a/19691491/2717464
+const addDays = (date: Date, days: number) => {
+  var result = new Date(date)
+  result.setDate(result.getDate() + days)
+  return result
+}
+
 const areRatesUpToDate = (ratesData: any) => {
-  if (!ratesData || ratesData.length < 1) {
+  if (
+    !ratesData ||
+    ratesData.length < 1 ||
+    !ratesData.dateUpdated ||
+    ratesData.dateUpdated.length < 1
+  ) {
     return false
   }
+
+  const currentDate = new Date()
+  if (currentDate > addDays(new Date(ratesData.dateUpdated), UPDATE_DAYS)) {
+    return false
+  }
+
   return true
-  // ratesData.date
 }
 
 const IndexPage: React.FC = () => {
@@ -80,7 +99,10 @@ const IndexPage: React.FC = () => {
     revalidateOnFocus: false,
     revalidateOnReconnect: false,
   })
-  data && setRatesdata(data)
+  if (data) {
+    data.dateUpdated = new Date()
+    setRatesdata(data)
+  }
   if (!apiUrl) {
     data = ratesData
   }
