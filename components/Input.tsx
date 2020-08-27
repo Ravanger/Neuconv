@@ -1,6 +1,6 @@
-import React from 'react'
-import MaskedInput from 'react-text-mask'
-import createNumberMask from 'text-mask-addons/dist/createNumberMask'
+import React from "react"
+import MaskedInput from "react-text-mask"
+import createNumberMask from "text-mask-addons/dist/createNumberMask"
 
 type InputProps = {
   value: number | undefined
@@ -9,7 +9,7 @@ type InputProps = {
 }
 
 const defaultMaskOptions = {
-  prefix: '',
+  prefix: "",
   includeThousandsSeparator: false,
   allowDecimal: true,
   decimalLimit: 2,

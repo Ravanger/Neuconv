@@ -1,12 +1,11 @@
-import React, { useState } from 'react'
-import useSWR, { SWRConfig } from 'swr'
-import styled from '@emotion/styled'
+import { useState } from "react"
+import useSWR from "swr"
+import styled from "@emotion/styled"
 
-import useLocalStorage from '@hooks/useLocalStorage'
-import Layout from '@components/Layout'
-import SEO from '@components/SEO'
-import Input from '@components/Input'
-import Select from '@components/Select'
+import useLocalStorage from "@hooks/useLocalStorage"
+import Layout from "@components/Layout"
+import Input from "@components/Input"
+import Select from "@components/Select"
 
 const FormConverter = styled.form`
   position: absolute;
@@ -57,7 +56,7 @@ const FormConverter = styled.form`
 const UPDATE_DAYS = 1
 
 const fetchData = (url: RequestInfo): Promise<any> =>
-  fetch(url).then(response => response.json())
+  fetch(url).then((response) => response.json())
 
 // https://stackoverflow.com/a/19691491/2717464
 const addDays = (date: Date, days: number) => {
@@ -84,15 +83,17 @@ const areRatesUpToDate = (ratesData: any) => {
   return true
 }
 
-const IndexPage: React.FC = () => {
-  const [ratesData, setRatesdata] = useLocalStorage('data', '')
+const Home = () => {
+  const [ratesData, setRatesdata] = useLocalStorage("data", "")
 
   const apiUrl: string | null =
     !areRatesUpToDate(ratesData) &&
-    process.env.GATSBY_API_URL &&
-    process.env.GATSBY_API_URL.length > 0
-      ? (process.env.GATSBY_API_URL as string)
+    process.env.API_URL &&
+    process.env.API_URL.length > 0
+      ? (process.env.API_URL as string)
       : null
+
+  console.log(apiUrl)
 
   let { data, error } = useSWR(apiUrl, {
     fetcher: fetchData,
@@ -122,8 +123,8 @@ const IndexPage: React.FC = () => {
   const [stateConvert, setStateConvert] = useState<StateTypes>({
     convertFromValue: undefined,
     convertToValue: undefined,
-    convertFromCurrency: 'EUR',
-    convertToCurrency: 'CAD',
+    convertFromCurrency: "EUR",
+    convertToCurrency: "CAD",
   })
 
   const handleChange = (
@@ -133,8 +134,8 @@ const IndexPage: React.FC = () => {
       ...stateConvert,
       [event.target.name]: event.target.value,
     })
-    if (event.target.name === 'convertFromValue') {
-    } else if (event.target.name === 'convertToValue') {
+    if (event.target.name === "convertFromValue") {
+    } else if (event.target.name === "convertToValue") {
     }
   }
 
@@ -148,10 +149,6 @@ const IndexPage: React.FC = () => {
 
   return (
     <Layout>
-      <SEO
-        title="Currency Converter"
-        description="A minimalistic currency converter"
-      />
       <FormConverter method="post">
         <div>
           <Input
@@ -184,4 +181,4 @@ const IndexPage: React.FC = () => {
   )
 }
 
-export default IndexPage
+export default Home
