@@ -22,13 +22,15 @@ const DivConverterWrapper = styled.div`
   input,
   select,
   p {
-    padding: 1em;
     border: thin solid gray;
     text-align: left;
+    padding-top: 1em;
+    padding-bottom: 1em;
   }
 
   input,
   p {
+    padding-left: 1em;
     width: 67%;
     border-right: none;
     border-radius: 0.75rem 0 0 0.75rem;
@@ -47,9 +49,13 @@ const DivConverterWrapper = styled.div`
     text-align: right;
   }
 
-  @media (max-width: 18rem) {
+  option {
+    direction: rtl;
+  }
+
+  @media (max-width: 12rem) {
     * {
-      font-size: 75%;
+      font-size: 80%;
     }
   }
 `
@@ -107,21 +113,21 @@ const HomePage = () => {
     data = ratesData
   }
 
-  let currencyNamesArray: string[] = []
-  currencyNamesArray = data && Object.keys(data.rates)
-  currencyNamesArray && currencyNamesArray.push(data.base) //Add base
+  let currencyNamesArray: [string, number][]
+  currencyNamesArray = data && Object.entries(data.rates)
+  currencyNamesArray && currencyNamesArray.push([data.base, 1]) //Add base
   currencyNamesArray && currencyNamesArray.sort()
 
   type StateTypes = {
-    convertFromValue: number | undefined
-    convertToValue: number | undefined
+    convertFromValue: number | string | undefined
+    convertToValue: number | string | undefined
     convertFromCurrency: string | undefined
     convertToCurrency: string | undefined
   }
 
   const [stateConvert, setStateConvert] = useState<StateTypes>({
     convertFromValue: undefined,
-    convertToValue: 0,
+    convertToValue: "0.00",
     convertFromCurrency: "EUR",
     convertToCurrency: "CAD",
   })
@@ -131,11 +137,9 @@ const HomePage = () => {
   ): void => {
     setStateConvert({
       ...stateConvert,
-      [event.target.name]: event.target.value,
+      convertFromValue: event.target.value,
+      convertToValue: (+event.target.value * 10).toFixed(2),
     })
-    if (event.target.name === "convertFromValue") {
-    } else if (event.target.name === "convertToValue") {
-    }
   }
 
   if (!currencyNamesArray || currencyNamesArray.length < 1) {

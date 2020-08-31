@@ -3,7 +3,7 @@ import React from "react"
 type SelectProps = {
   name: string
   value: string | undefined
-  currencynamesarray: string[]
+  currencynamesarray: [string, number][]
   onChange?: (event: React.ChangeEvent<HTMLSelectElement>) => void
 }
 
@@ -12,8 +12,8 @@ const Select = (props: SelectProps) => {
     <select {...props}>
       {props.currencynamesarray &&
         props.currencynamesarray.map((currencyName, index) => (
-          <option value={currencyName} key={index}>
-            {currencyName}
+          <option label={currencyName[0]} key={index} value={currencyName[1]}>
+            {currencyName[0]}
           </option>
         ))}
     </select>

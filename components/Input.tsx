@@ -3,7 +3,7 @@ import MaskedInput from "react-text-mask"
 import createNumberMask from "text-mask-addons/dist/createNumberMask"
 
 type InputProps = {
-  value: number | undefined
+  value: number | string | undefined
   name: string
   onChange?: (event: React.ChangeEvent<HTMLInputElement>) => void
 }
