@@ -64,6 +64,11 @@ const DivConverterWrapper = styled.div`
     margin-left: auto;
   }
 
+  p {
+    text-align: center;
+    margin-top: 2rem;
+  }
+
   @media (max-width: 12rem) {
     * {
       font-size: 80%;
@@ -281,6 +286,7 @@ const HomePage = () => {
               onChange={handleSelectChange}
             />
           </div>
+          <p>* rounded up to nearest cent</p>
         </DivConverterWrapper>
       </Layout>
       <FooterUpdatedAt>
