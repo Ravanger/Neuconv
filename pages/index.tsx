@@ -7,46 +7,47 @@ import Layout from "@components/Layout"
 import Input from "@components/Input"
 import Select from "@components/Select"
 
-const FormConverter = styled.form`
-  position: absolute;
-  left: 50%;
-  top: 50%;
-  transform: translate(-50%, -50%);
+const DivConverterWrapper = styled.div`
+  display: flex;
+  flex-direction: column;
   width: 100%;
-  text-align: center;
+  max-width: 18rem;
+  font-size: 0.8rem;
 
   div {
     display: flex;
-    justify-content: center;
     margin: 1rem;
   }
 
   input,
-  select {
+  select,
+  p {
     padding: 1em;
     border: thin solid gray;
+    text-align: left;
   }
 
-  input {
+  input,
+  p {
+    width: 67%;
     border-right: none;
     border-radius: 0.75rem 0 0 0.75rem;
+    line-height: 1.6;
+  }
+
+  p {
+    color: grey;
   }
 
   select {
+    width: 33%;
     border-left: none;
     border-radius: 0 0.75rem 0.75rem 0;
-    appearance: none;
-    background-image: linear-gradient(gray, gray),
-      linear-gradient(-135deg, transparent 50%, white 50%),
-      linear-gradient(-225deg, transparent 50%, white 50%),
-      linear-gradient(white 42%, gray 42%);
-    background-repeat: no-repeat;
-    background-size: 1px 100%, 1rem 2.5rem, 1rem 2.5rem, 1rem 100%;
-    background-position: right 1rem center, right bottom, right bottom,
-      right bottom;
+    appearance: menulist-button;
+    text-align: right;
   }
 
-  @media (max-width: 14em) {
+  @media (max-width: 18rem) {
     * {
       font-size: 75%;
     }
@@ -83,7 +84,7 @@ const areRatesUpToDate = (ratesData: any) => {
   return true
 }
 
-const Home = () => {
+const HomePage = () => {
   const [ratesData, setRatesdata] = useLocalStorage("data", "")
 
   const apiUrl: string | null =
@@ -92,8 +93,6 @@ const Home = () => {
     process.env.API_URL.length > 0
       ? (process.env.API_URL as string)
       : null
-
-  console.log(apiUrl)
 
   let { data, error } = useSWR(apiUrl, {
     fetcher: fetchData,
@@ -122,7 +121,7 @@ const Home = () => {
 
   const [stateConvert, setStateConvert] = useState<StateTypes>({
     convertFromValue: undefined,
-    convertToValue: undefined,
+    convertToValue: 0,
     convertFromCurrency: "EUR",
     convertToCurrency: "CAD",
   })
@@ -149,7 +148,7 @@ const Home = () => {
 
   return (
     <Layout>
-      <FormConverter method="post">
+      <DivConverterWrapper>
         <div>
           <Input
             value={stateConvert.convertFromValue}
@@ -164,11 +163,7 @@ const Home = () => {
           />
         </div>
         <div>
-          <Input
-            value={stateConvert.convertToValue}
-            name="convertToValue"
-            onChange={handleChange}
-          />
+          <p>{stateConvert.convertToValue}</p>
           <Select
             name="convertToCurrency"
             currencynamesarray={currencyNamesArray}
@@ -176,9 +171,9 @@ const Home = () => {
             onChange={handleChange}
           />
         </div>
-      </FormConverter>
+      </DivConverterWrapper>
     </Layout>
   )
 }
 
-export default Home
+export default HomePage
