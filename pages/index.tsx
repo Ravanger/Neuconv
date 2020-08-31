@@ -1,3 +1,7 @@
+// TODO: Hover animation
+// TODO: Click animation
+// TODO: Format output with commas
+
 import { useState } from "react"
 import useSWR from "swr"
 import styled from "@emotion/styled"
