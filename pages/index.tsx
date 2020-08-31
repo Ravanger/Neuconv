@@ -21,7 +21,7 @@ const DivConverterWrapper = styled.div`
 
   input,
   select,
-  p {
+  span {
     border: thin solid gray;
     text-align: left;
     padding-top: 1em;
@@ -29,16 +29,12 @@ const DivConverterWrapper = styled.div`
   }
 
   input,
-  p {
+  span {
     padding-left: 1em;
     width: 67%;
     border-right: none;
     border-radius: 0.75rem 0 0 0.75rem;
     line-height: 1.6;
-  }
-
-  p {
-    color: grey;
   }
 
   select {
@@ -142,6 +138,7 @@ const HomePage = () => {
   })
 
   const [stateFromValueMultiplier, setStateFromValueMultiplier] = useState(1)
+  const [stateToValueMultiplier, setStateToValueMultiplier] = useState(1)
 
   type StateTypesSelections = {
     convertFromCurrency: string | undefined
@@ -161,9 +158,13 @@ const HomePage = () => {
     setStateConvertValues({
       ...stateConvertValues,
       convertFromValue: event.target.value,
-      convertToValue: (+event.target.value / stateFromValueMultiplier).toFixed(
-        2
-      ),
+      convertToValue: (
+        Math.round(
+          (+event.target.value / stateFromValueMultiplier) *
+            stateToValueMultiplier *
+            100
+        ) / 100
+      ).toFixed(2),
     })
   }
 
@@ -178,13 +179,30 @@ const HomePage = () => {
     const valueMultiplier = +event.target.options[event.target.selectedIndex]
       .dataset.value
 
-    setStateFromValueMultiplier(valueMultiplier)
-    setStateConvertValues({
-      ...stateConvertValues,
-      convertToValue: (
-        +stateConvertValues.convertFromValue / valueMultiplier
-      ).toFixed(2),
-    })
+    switch (event.target.name) {
+      case "convertFromCurrency":
+        setStateFromValueMultiplier(valueMultiplier)
+        setStateConvertValues({
+          ...stateConvertValues,
+          convertToValue: (
+            (+stateConvertValues.convertFromValue / valueMultiplier) *
+            stateToValueMultiplier
+          ).toFixed(2),
+        })
+        break
+      case "convertToCurrency":
+        setStateToValueMultiplier(valueMultiplier)
+        setStateConvertValues({
+          ...stateConvertValues,
+          convertToValue: (
+            (+stateConvertValues.convertFromValue / stateFromValueMultiplier) *
+            valueMultiplier
+          ).toFixed(2),
+        })
+        break
+      default:
+        break
+    }
   }
 
   if (!currencyNamesArray || currencyNamesArray.length < 1) {
@@ -213,7 +231,7 @@ const HomePage = () => {
             />
           </div>
           <div>
-            <p>{stateConvertValues.convertToValue}</p>
+            <span>{stateConvertValues.convertToValue}</span>
             <Select
               name="convertToCurrency"
               currencynamesarray={currencyNamesArray}
