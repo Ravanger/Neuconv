@@ -1,6 +1,7 @@
 import { useState } from "react"
 import useSWR from "swr"
 import styled from "@emotion/styled"
+import { TiArrowSync } from "react-icons/ti"
 
 import useLocalStorage from "@hooks/useLocalStorage"
 import Layout from "@components/Layout"
@@ -16,6 +17,7 @@ const DivConverterWrapper = styled.div`
 
   div {
     display: flex;
+    justify-content: center;
     margin: 1rem;
   }
 
@@ -47,6 +49,15 @@ const DivConverterWrapper = styled.div`
 
   option {
     direction: rtl;
+  }
+
+  button {
+    font-size: 2rem;
+    padding: 0;
+    cursor: pointer;
+    background: none;
+    border: none;
+    margin-left: auto;
   }
 
   @media (max-width: 12rem) {
@@ -156,7 +167,6 @@ const HomePage = () => {
     event: React.ChangeEvent<HTMLInputElement>
   ): void => {
     setStateConvertValues({
-      ...stateConvertValues,
       convertFromValue: event.target.value,
       convertToValue: (
         Math.round(
@@ -205,6 +215,31 @@ const HomePage = () => {
     }
   }
 
+  const switchCurrencies = () => {
+    const prevFromCurrencySelection = stateConvertSelections.convertFromCurrency
+    const prevToCurrencySelection = stateConvertSelections.convertToCurrency
+    setStateConvertSelections({
+      convertFromCurrency: prevToCurrencySelection,
+      convertToCurrency: prevFromCurrencySelection,
+    })
+
+    const prevFromMultiplier = stateFromValueMultiplier
+    const prevToMultiplier = stateToValueMultiplier
+    setStateFromValueMultiplier(prevToMultiplier)
+    setStateToValueMultiplier(prevFromMultiplier)
+
+    setStateConvertValues({
+      ...stateConvertValues,
+      convertToValue: (
+        Math.round(
+          (+stateConvertValues.convertFromValue / prevToMultiplier) *
+            prevFromMultiplier *
+            100
+        ) / 100
+      ).toFixed(2),
+    })
+  }
+
   if (!currencyNamesArray || currencyNamesArray.length < 1) {
     return <p>Loading...</p>
   }
@@ -230,6 +265,9 @@ const HomePage = () => {
               onChange={handleSelectChange}
             />
           </div>
+          <button onClick={switchCurrencies}>
+            <TiArrowSync />
+          </button>
           <div>
             <span>{stateConvertValues.convertToValue}</span>
             <Select
