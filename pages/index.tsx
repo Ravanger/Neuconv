@@ -60,6 +60,15 @@ const DivConverterWrapper = styled.div`
   }
 `
 
+const FooterUpdatedAt = styled.footer`
+  position: absolute;
+  bottom: 0;
+  width: 100vw;
+  text-align: center;
+  padding: 1em;
+  font-size: 0.8rem;
+`
+
 const UPDATE_DAYS = 1
 
 const fetchData = (url: RequestInfo): Promise<any> =>
@@ -112,6 +121,8 @@ const HomePage = () => {
   if (!apiUrl) {
     data = ratesData
   }
+
+  const lastUpdatedDate = new Date(data && data.date)
 
   let currencyNamesArray: [string, number][]
   currencyNamesArray = data && Object.entries(data.rates)
@@ -185,32 +196,39 @@ const HomePage = () => {
   }
 
   return (
-    <Layout>
-      <DivConverterWrapper>
-        <div>
-          <Input
-            value={stateConvertValues.convertFromValue}
-            name="convertFromValue"
-            onChange={handleInputChange}
-          />
-          <Select
-            name="convertFromCurrency"
-            currencynamesarray={currencyNamesArray}
-            value={stateConvertSelections.convertFromCurrency}
-            onChange={handleSelectChange}
-          />
-        </div>
-        <div>
-          <p>{stateConvertValues.convertToValue}</p>
-          <Select
-            name="convertToCurrency"
-            currencynamesarray={currencyNamesArray}
-            value={stateConvertSelections.convertToCurrency}
-            onChange={handleSelectChange}
-          />
-        </div>
-      </DivConverterWrapper>
-    </Layout>
+    <>
+      <Layout>
+        <DivConverterWrapper>
+          <div>
+            <Input
+              value={stateConvertValues.convertFromValue}
+              name="convertFromValue"
+              onChange={handleInputChange}
+            />
+            <Select
+              name="convertFromCurrency"
+              currencynamesarray={currencyNamesArray}
+              value={stateConvertSelections.convertFromCurrency}
+              onChange={handleSelectChange}
+            />
+          </div>
+          <div>
+            <p>{stateConvertValues.convertToValue}</p>
+            <Select
+              name="convertToCurrency"
+              currencynamesarray={currencyNamesArray}
+              value={stateConvertSelections.convertToCurrency}
+              onChange={handleSelectChange}
+            />
+          </div>
+        </DivConverterWrapper>
+      </Layout>
+      <FooterUpdatedAt>
+        <time dateTime={lastUpdatedDate.toISOString()}>
+          API last updated on {lastUpdatedDate.toLocaleString()}
+        </time>
+      </FooterUpdatedAt>
+    </>
   )
 }
 
