@@ -118,27 +118,61 @@ const HomePage = () => {
   currencyNamesArray && currencyNamesArray.push([data.base, 1]) //Add base
   currencyNamesArray && currencyNamesArray.sort()
 
-  type StateTypes = {
+  type StateTypesValues = {
     convertFromValue: number | string | undefined
     convertToValue: number | string | undefined
+  }
+
+  const [stateConvertValues, setStateConvertValues] = useState<
+    StateTypesValues
+  >({
+    convertFromValue: undefined,
+    convertToValue: "0.00",
+  })
+
+  const [stateFromValueMultiplier, setStateFromValueMultiplier] = useState(1)
+
+  type StateTypesSelections = {
     convertFromCurrency: string | undefined
     convertToCurrency: string | undefined
   }
 
-  const [stateConvert, setStateConvert] = useState<StateTypes>({
-    convertFromValue: undefined,
-    convertToValue: "0.00",
+  const [stateConvertSelections, setStateConvertSelections] = useState<
+    StateTypesSelections
+  >({
     convertFromCurrency: "EUR",
-    convertToCurrency: "CAD",
+    convertToCurrency: "EUR",
   })
 
-  const handleChange = (
-    event: React.ChangeEvent<HTMLInputElement | HTMLSelectElement>
+  const handleInputChange = (
+    event: React.ChangeEvent<HTMLInputElement>
   ): void => {
-    setStateConvert({
-      ...stateConvert,
+    setStateConvertValues({
+      ...stateConvertValues,
       convertFromValue: event.target.value,
-      convertToValue: (+event.target.value * 10).toFixed(2),
+      convertToValue: (+event.target.value / stateFromValueMultiplier).toFixed(
+        2
+      ),
+    })
+  }
+
+  const handleSelectChange = (
+    event: React.ChangeEvent<HTMLSelectElement>
+  ): void => {
+    setStateConvertSelections({
+      ...stateConvertSelections,
+      [event.target.name]: event.target.value,
+    })
+
+    const valueMultiplier = +event.target.options[event.target.selectedIndex]
+      .dataset.value
+
+    setStateFromValueMultiplier(valueMultiplier)
+    setStateConvertValues({
+      ...stateConvertValues,
+      convertToValue: (
+        +stateConvertValues.convertFromValue / valueMultiplier
+      ).toFixed(2),
     })
   }
 
@@ -155,24 +189,24 @@ const HomePage = () => {
       <DivConverterWrapper>
         <div>
           <Input
-            value={stateConvert.convertFromValue}
+            value={stateConvertValues.convertFromValue}
             name="convertFromValue"
-            onChange={handleChange}
+            onChange={handleInputChange}
           />
           <Select
             name="convertFromCurrency"
             currencynamesarray={currencyNamesArray}
-            value={stateConvert.convertFromCurrency}
-            onChange={handleChange}
+            value={stateConvertSelections.convertFromCurrency}
+            onChange={handleSelectChange}
           />
         </div>
         <div>
-          <p>{stateConvert.convertToValue}</p>
+          <p>{stateConvertValues.convertToValue}</p>
           <Select
             name="convertToCurrency"
             currencynamesarray={currencyNamesArray}
-            value={stateConvert.convertToCurrency}
-            onChange={handleChange}
+            value={stateConvertSelections.convertToCurrency}
+            onChange={handleSelectChange}
           />
         </div>
       </DivConverterWrapper>
