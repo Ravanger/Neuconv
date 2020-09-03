@@ -6,9 +6,6 @@
 // TODO: Add ads
 // TODO: Manifest and PWA
 // TODO: NaN error
-// TODO: Fix static date in footer
-// TODO: Arrow button formatting (on the right)
-// TODO: Split file up
 
 import { useState } from "react"
 import useSWR from "swr"
@@ -22,15 +19,21 @@ import Select from "@components/Select"
 
 const DivConverterWrapper = styled.div`
   display: flex;
-  flex-direction: column;
+  justify-content: center;
+  align-items: center;
   width: 100%;
-  max-width: 18rem;
   font-size: 0.8rem;
 
   div {
     display: flex;
+    flex-direction: column;
     justify-content: center;
     margin: 1rem;
+    margin-right: 0;
+
+    > div {
+      flex-direction: row;
+    }
   }
 
   input,
@@ -69,7 +72,7 @@ const DivConverterWrapper = styled.div`
     cursor: pointer;
     background: none;
     border: none;
-    margin-left: auto;
+    height: max-content;
   }
 
   p {
@@ -84,7 +87,7 @@ const DivConverterWrapper = styled.div`
   }
 `
 
-const FooterUpdatedAt = styled.footer`
+const FooterBottom = styled.footer`
   position: absolute;
   bottom: 0;
   width: 100vw;
@@ -271,38 +274,40 @@ const HomePage = () => {
       <Layout>
         <DivConverterWrapper>
           <div>
-            <Input
-              value={stateConvertValues.convertFromValue}
-              name="convertFromValue"
-              onChange={handleInputChange}
-            />
-            <Select
-              name="convertFromCurrency"
-              currencynamesarray={currencyNamesArray}
-              value={stateConvertSelections.convertFromCurrency}
-              onChange={handleSelectChange}
-            />
+            <div>
+              <Input
+                value={stateConvertValues.convertFromValue}
+                name="convertFromValue"
+                onChange={handleInputChange}
+              />
+              <Select
+                name="convertFromCurrency"
+                currencynamesarray={currencyNamesArray}
+                value={stateConvertSelections.convertFromCurrency}
+                onChange={handleSelectChange}
+              />
+            </div>
+            <div>
+              <span>{stateConvertValues.convertToValue}</span>
+              <Select
+                name="convertToCurrency"
+                currencynamesarray={currencyNamesArray}
+                value={stateConvertSelections.convertToCurrency}
+                onChange={handleSelectChange}
+              />
+            </div>
           </div>
           <button onClick={switchCurrencies}>
             <TiArrowSync />
           </button>
-          <div>
-            <span>{stateConvertValues.convertToValue}</span>
-            <Select
-              name="convertToCurrency"
-              currencynamesarray={currencyNamesArray}
-              value={stateConvertSelections.convertToCurrency}
-              onChange={handleSelectChange}
-            />
-          </div>
-          <p>* rounded up to nearest centesimal</p>
         </DivConverterWrapper>
+        {/* <p>* rounded up to nearest centesimal</p> */}
       </Layout>
-      <FooterUpdatedAt>
+      <FooterBottom>
         <time dateTime={lastUpdatedDate.toISOString()}>
           API last updated on {lastUpdatedDate.toDateString()}
         </time>
-      </FooterUpdatedAt>
+      </FooterBottom>
     </>
   )
 }
