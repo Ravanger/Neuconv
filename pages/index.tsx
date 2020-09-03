@@ -1,4 +1,3 @@
-// TODO: Click animation
 // TODO: Format output with commas
 // TODO: SEO data
 // TODO: NextJS data fetching
@@ -65,17 +64,21 @@ const DivConverterWrapper = styled.div`
   }
 
   button {
+    display: flex;
     font-size: 2rem;
     padding: 0;
     cursor: pointer;
-    line-height: 1;
     background: none;
     border: none;
-    height: max-content;
     transition: transform ease 0.2s;
 
     &:hover {
       transform: rotate(180deg);
+    }
+
+    &:active {
+      transform: rotate(360deg);
+      transition: transform ease 0.1s;
     }
   }
 
