@@ -1,6 +1,14 @@
 // TODO: Hover animation
 // TODO: Click animation
 // TODO: Format output with commas
+// TODO: SEO data
+// TODO: NextJS data fetching
+// TODO: Add ads
+// TODO: Manifest and PWA
+// TODO: NaN error
+// TODO: Fix static date in footer
+// TODO: Arrow button formatting (on the right)
+// TODO: Split file up
 
 import { useState } from "react"
 import useSWR from "swr"
@@ -87,9 +95,6 @@ const FooterUpdatedAt = styled.footer`
 
 const UPDATE_DAYS = 1
 
-const fetchData = (url: RequestInfo): Promise<any> =>
-  fetch(url).then((response) => response.json())
-
 // https://stackoverflow.com/a/19691491/2717464
 const addDays = (date: Date, days: number) => {
   var result = new Date(date)
@@ -114,6 +119,9 @@ const areRatesUpToDate = (ratesData: any) => {
 
   return true
 }
+
+const fetchData = (url: RequestInfo): Promise<any> =>
+  fetch(url).then((response) => response.json())
 
 const HomePage = () => {
   const [ratesData, setRatesdata] = useLocalStorage("data", "")
@@ -291,7 +299,7 @@ const HomePage = () => {
       </Layout>
       <FooterUpdatedAt>
         <time dateTime={lastUpdatedDate.toISOString()}>
-          API last updated on {lastUpdatedDate.toLocaleString()}
+          API last updated on {lastUpdatedDate.toDateString()}
         </time>
       </FooterUpdatedAt>
     </>
