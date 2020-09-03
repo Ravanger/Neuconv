@@ -83,16 +83,16 @@ const DivConverterWrapper = styled.div`
     }
   }
 
-  p {
-    text-align: center;
-    margin-top: 2rem;
-  }
-
   @media (max-width: 12rem) {
     * {
       font-size: 80%;
     }
   }
+`
+
+const PRoundedUp = styled.p`
+  text-align: center;
+  font-size: 0.8rem;
 `
 
 const FooterBottom = styled.footer`
@@ -314,7 +314,7 @@ const HomePage = () => {
             <TiArrowSync />
           </button>
         </DivConverterWrapper>
-        {/* <p>* rounded up to nearest centesimal</p> */}
+        <PRoundedUp>* rounded up to nearest centesimal</PRoundedUp>
       </Layout>
       <FooterBottom>
         <time dateTime={lastUpdatedDate.toISOString()}>
