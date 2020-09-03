@@ -257,6 +257,7 @@ const HomePage = () => {
     })
   }
 
+  // Render
   if (!currencyNamesArray || currencyNamesArray.length < 1) {
     return <p>Loading...</p>
   }
@@ -294,7 +295,7 @@ const HomePage = () => {
               onChange={handleSelectChange}
             />
           </div>
-          <p>* rounded up to nearest cent</p>
+          <p>* rounded up to nearest centesimal</p>
         </DivConverterWrapper>
       </Layout>
       <FooterUpdatedAt>
