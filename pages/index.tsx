@@ -72,7 +72,7 @@ const DivConverterWrapper = styled.div`
     background: none;
     border: none;
     height: max-content;
-    transition: transform ease 0.5s;
+    transition: transform ease 0.2s;
 
     &:hover {
       transform: rotate(180deg);
