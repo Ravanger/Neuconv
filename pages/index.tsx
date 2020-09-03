@@ -5,7 +5,6 @@
 // TODO: NextJS data fetching
 // TODO: Add ads
 // TODO: Manifest and PWA
-// TODO: NaN error
 
 import { useState } from "react"
 import useSWR from "swr"
@@ -208,6 +207,9 @@ const HomePage = () => {
 
     const valueMultiplier = +event.target.options[event.target.selectedIndex]
       .dataset.value
+    const convertFromValue = stateConvertValues.convertFromValue
+      ? +stateConvertValues.convertFromValue
+      : 0
 
     switch (event.target.name) {
       case "convertFromCurrency":
@@ -215,7 +217,7 @@ const HomePage = () => {
         setStateConvertValues({
           ...stateConvertValues,
           convertToValue: (
-            (+stateConvertValues.convertFromValue / valueMultiplier) *
+            (convertFromValue / valueMultiplier) *
             stateToValueMultiplier
           ).toFixed(2),
         })
@@ -225,7 +227,7 @@ const HomePage = () => {
         setStateConvertValues({
           ...stateConvertValues,
           convertToValue: (
-            (+stateConvertValues.convertFromValue / stateFromValueMultiplier) *
+            (convertFromValue / stateFromValueMultiplier) *
             valueMultiplier
           ).toFixed(2),
         })
@@ -248,13 +250,15 @@ const HomePage = () => {
     setStateFromValueMultiplier(prevToMultiplier)
     setStateToValueMultiplier(prevFromMultiplier)
 
+    const convertFromValue = stateConvertValues.convertFromValue
+      ? +stateConvertValues.convertFromValue
+      : 0
+
     setStateConvertValues({
       ...stateConvertValues,
       convertToValue: (
         Math.round(
-          (+stateConvertValues.convertFromValue / prevToMultiplier) *
-            prevFromMultiplier *
-            100
+          (convertFromValue / prevToMultiplier) * prevFromMultiplier * 100
         ) / 100
       ).toFixed(2),
     })
