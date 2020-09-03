@@ -1,4 +1,3 @@
-// TODO: Hover animation
 // TODO: Click animation
 // TODO: Format output with commas
 // TODO: SEO data
@@ -69,9 +68,15 @@ const DivConverterWrapper = styled.div`
     font-size: 2rem;
     padding: 0;
     cursor: pointer;
+    line-height: 1;
     background: none;
     border: none;
     height: max-content;
+    transition: transform ease 0.5s;
+
+    &:hover {
+      transform: rotate(180deg);
+    }
   }
 
   p {
