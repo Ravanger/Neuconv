@@ -3,6 +3,7 @@
 // TODO: Add ads
 // TODO: Manifest and PWA
 // TODO: Nick's design
+// TODO: Sitemap
 
 import { useState } from "react"
 import styled from "@emotion/styled"
@@ -241,10 +242,12 @@ const HomePage = ({ ratesData }: any) => {
               <Input
                 value={stateConvertValues.convertFromValue}
                 name="convertFromValue"
+                id="convertFromValue"
                 onChange={handleInputChange}
               />
               <Select
                 name="convertFromCurrency"
+                id="convertFromCurrency"
                 currencynamesarray={currencyNamesArray}
                 value={stateConvertSelections.convertFromCurrency}
                 onChange={handleSelectChange}
@@ -254,13 +257,14 @@ const HomePage = ({ ratesData }: any) => {
               <span>{stateConvertValues.convertToValue}</span>
               <Select
                 name="convertToCurrency"
+                id="convertToCurrency"
                 currencynamesarray={currencyNamesArray}
                 value={stateConvertSelections.convertToCurrency}
                 onChange={handleSelectChange}
               />
             </div>
           </div>
-          <button onClick={switchCurrencies}>
+          <button onClick={switchCurrencies} aria-label="Switch currencies">
             <TiArrowSync />
           </button>
         </DivConverterWrapper>

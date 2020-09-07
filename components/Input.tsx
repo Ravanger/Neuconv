@@ -6,6 +6,7 @@ type InputProps = {
   value: number | string | undefined
   name: string
   onChange?: (event: React.ChangeEvent<HTMLInputElement>) => void
+  id?: string
 }
 
 const defaultMaskOptions = {

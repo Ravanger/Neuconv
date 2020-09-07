@@ -2,6 +2,7 @@ import React from "react"
 
 type SelectProps = {
   name: string
+  id?: string
   value: string | undefined
   currencynamesarray: [string, number][]
   onChange?: (event: React.ChangeEvent<HTMLSelectElement>) => void
@@ -9,7 +10,12 @@ type SelectProps = {
 
 const Select = (props: SelectProps) => {
   return (
-    <select name={props.name} value={props.value} onChange={props.onChange}>
+    <select
+      name={props.name}
+      value={props.value}
+      onChange={props.onChange}
+      id={props.id}
+    >
       {props.currencynamesarray &&
         props.currencynamesarray.map((currencyName, index) => (
           <option
