@@ -5,11 +5,9 @@
 // TODO: Nick's design
 
 import { useState } from "react"
-import useSWR from "swr"
 import styled from "@emotion/styled"
 import { TiArrowSync } from "react-icons/ti"
 
-import useLocalStorage from "@hooks/useLocalStorage"
 import Layout from "@components/Layout"
 import Input from "@components/Input"
 import Select from "@components/Select"
@@ -105,66 +103,7 @@ const FooterBottom = styled.footer`
   font-size: 0.8rem;
 `
 
-const UPDATE_DAYS = 1
-
-// https://stackoverflow.com/a/19691491/2717464
-const addDays = (date: Date, days: number) => {
-  var result = new Date(date)
-  result.setDate(result.getDate() + days)
-  return result
-}
-
-const areRatesUpToDate = (ratesData: any) => {
-  if (
-    !ratesData ||
-    ratesData.length < 1 ||
-    !ratesData.dateUpdated ||
-    ratesData.dateUpdated.length < 1
-  ) {
-    return false
-  }
-
-  const currentDate = new Date()
-  if (currentDate > addDays(new Date(ratesData.dateUpdated), UPDATE_DAYS)) {
-    return false
-  }
-
-  return true
-}
-
-const fetchData = (url: RequestInfo): Promise<any> =>
-  fetch(url).then((response) => response.json())
-
-const HomePage = () => {
-  const [ratesData, setRatesdata] = useLocalStorage("data", "")
-
-  const apiUrl: string | null =
-    !areRatesUpToDate(ratesData) &&
-    process.env.NEXT_PUBLIC_API_URL &&
-    process.env.NEXT_PUBLIC_API_URL.length > 0
-      ? (process.env.NEXT_PUBLIC_API_URL as string)
-      : null
-
-  let { data, error } = useSWR(apiUrl, {
-    fetcher: fetchData,
-    revalidateOnFocus: false,
-    revalidateOnReconnect: false,
-  })
-  if (data) {
-    data.dateUpdated = new Date()
-    setRatesdata(data)
-  }
-  if (!apiUrl) {
-    data = ratesData
-  }
-
-  const lastUpdatedDate = new Date(data && data.date)
-
-  let currencyNamesArray: [string, number][]
-  currencyNamesArray = data && Object.entries(data.rates)
-  currencyNamesArray && currencyNamesArray.push([data.base, 1]) //Add base
-  currencyNamesArray && currencyNamesArray.sort()
-
+const HomePage = ({ ratesData }: any) => {
   type StateTypesValues = {
     convertFromValue: number | string | undefined
     convertToValue: number | string | undefined
@@ -191,6 +130,13 @@ const HomePage = () => {
     convertFromCurrency: "EUR",
     convertToCurrency: "EUR",
   })
+
+  const lastUpdatedDate = new Date(ratesData && ratesData.date)
+
+  let currencyNamesArray: [string, number][]
+  currencyNamesArray = ratesData && Object.entries(ratesData.rates)
+  currencyNamesArray && currencyNamesArray.push([ratesData.base, 1]) //Add base
+  currencyNamesArray && currencyNamesArray.sort()
 
   const handleInputChange = (
     event: React.ChangeEvent<HTMLInputElement>
@@ -278,11 +224,11 @@ const HomePage = () => {
 
   // Render
   if (!currencyNamesArray || currencyNamesArray.length < 1) {
-    return <p>Loading...</p>
-  }
-
-  if (error && error.length > 0) {
-    return <p>{`Error: ${error}`}</p>
+    return (
+      <Layout>
+        <p>Loading...</p>
+      </Layout>
+    )
   }
 
   return (
@@ -327,6 +273,20 @@ const HomePage = () => {
       </FooterBottom>
     </>
   )
+}
+
+export async function getStaticProps() {
+  if (process.env.NEXT_PUBLIC_API_URL) {
+    const res = await fetch(process.env.NEXT_PUBLIC_API_URL)
+    const ratesData = await res.json()
+
+    return {
+      props: {
+        ratesData,
+      },
+      revalidate: 86400, // 24 hours in seconds
+    }
+  }
 }
 
 export default HomePage
