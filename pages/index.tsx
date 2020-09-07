@@ -215,8 +215,10 @@ const HomePage = () => {
       [event.target.name]: event.target.value,
     })
 
-    const valueMultiplier = +event.target.options[event.target.selectedIndex]
-      .dataset.value
+    const valueMultiplierValue =
+      event.target.options[event.target.selectedIndex].dataset.value
+    const valueMultiplier = valueMultiplierValue ? +valueMultiplierValue : 0
+
     const convertFromValue = stateConvertValues.convertFromValue
       ? +stateConvertValues.convertFromValue
       : 0
