@@ -29,16 +29,22 @@ const DivConverterWrapper = styled.div`
 
     > div {
       flex-direction: row;
+      border-radius: 0.75rem;
+      box-shadow: inset 0.5rem 0.5rem 0.5rem #e6e6e6,
+        inset -0.5rem -0.5rem 0.5rem #ffffff;
+      padding: 0.25rem;
+      padding-right: 0;
     }
   }
 
   input,
   select,
   span {
-    border: thin solid gray;
+    border: none;
     text-align: left;
     padding-top: 1em;
     padding-bottom: 1em;
+    background: none;
   }
 
   input,
@@ -52,10 +58,14 @@ const DivConverterWrapper = styled.div`
 
   select {
     width: 33%;
-    border-left: none;
-    border-radius: 0 0.75rem 0.75rem 0;
+    border: none;
+    border-radius: 0.75rem;
     appearance: menulist-button;
     text-align: right;
+    box-shadow: 0.25rem 0.25rem 0.25rem #e6e6e6,
+      -0.25rem -0.25rem 0.25rem #ffffff;
+    width: fit-content;
+    height: fit-content;
   }
 
   option {
@@ -71,13 +81,16 @@ const DivConverterWrapper = styled.div`
     border: none;
     transition: transform ease 0.2s;
     outline: none;
+    border-radius: 0.75rem;
+    box-shadow: 0.25rem 0.25rem 0.25rem #e6e6e6,
+      -0.25rem -0.25rem 0.25rem #ffffff;
 
     &:hover {
-      transform: rotateZ(180deg);
+      transform: rotateX(180deg);
     }
 
     &:active {
-      transform: rotateZ(360deg);
+      transform: rotateX(360deg);
       transition: transform ease 0.1s;
     }
   }
@@ -91,7 +104,6 @@ const DivConverterWrapper = styled.div`
 
 const PRoundedUp = styled.p`
   text-align: center;
-  font-size: 0.8rem;
 `
 
 const FooterBottom = styled.footer`
