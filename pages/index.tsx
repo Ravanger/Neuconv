@@ -3,7 +3,6 @@
 // TODO: Add ads
 // TODO: Manifest and PWA
 // TODO: Nick's design
-// TODO: Sitemap
 
 import { useState } from "react"
 import styled from "@emotion/styled"
@@ -234,7 +233,10 @@ const HomePage = ({ ratesData }: any) => {
 
   return (
     <>
-      <SEO title="Neuconv" />
+      <SEO
+        title="Neuconv"
+        pageUrl="https://currency-converter.ravanger.vercel.app"
+      />
       <Layout>
         <DivConverterWrapper>
           <div>
