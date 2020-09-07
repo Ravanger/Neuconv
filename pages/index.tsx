@@ -1,5 +1,4 @@
 // TODO: Format output with commas
-// TODO: SEO data
 // TODO: Add ads
 // TODO: Manifest and PWA
 // TODO: Nick's design
@@ -7,6 +6,7 @@
 import { useState } from "react"
 import styled from "@emotion/styled"
 import { TiArrowSync } from "react-icons/ti"
+import { GetStaticProps } from "next"
 
 import Layout from "@components/Layout"
 import Input from "@components/Input"
@@ -235,6 +235,9 @@ const HomePage = ({ ratesData }: any) => {
     <>
       <SEO
         title="Neuconv"
+        description="A minimalistic currency converter"
+        keywords="Minimalistic,currency,converter,money,exchange"
+        author="Boris Rossovsky"
         pageUrl="https://currency-converter.ravanger.vercel.app"
       />
       <Layout>
@@ -281,7 +284,7 @@ const HomePage = ({ ratesData }: any) => {
   )
 }
 
-export async function getStaticProps() {
+export const getStaticProps: GetStaticProps = async () => {
   if (process.env.NEXT_PUBLIC_API_URL) {
     const res = await fetch(process.env.NEXT_PUBLIC_API_URL)
     const ratesData = await res.json()
@@ -292,6 +295,11 @@ export async function getStaticProps() {
       },
       revalidate: 86400, // 24 hours in seconds
     }
+  }
+
+  return {
+    props: {},
+    revalidate: 86400, // 24 hours in seconds
   }
 }
 
