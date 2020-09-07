@@ -1,8 +1,8 @@
 // TODO: Format output with commas
 // TODO: SEO data
-// TODO: NextJS data fetching
 // TODO: Add ads
 // TODO: Manifest and PWA
+// TODO: Nick's design
 
 import { useState } from "react"
 import useSWR from "swr"
@@ -13,6 +13,7 @@ import useLocalStorage from "@hooks/useLocalStorage"
 import Layout from "@components/Layout"
 import Input from "@components/Input"
 import Select from "@components/Select"
+import SEO from "@components/SEO"
 
 const DivConverterWrapper = styled.div`
   display: flex;
@@ -74,11 +75,11 @@ const DivConverterWrapper = styled.div`
     outline: none;
 
     &:hover {
-      transform: rotate(180deg);
+      transform: rotateZ(180deg);
     }
 
     &:active {
-      transform: rotate(360deg);
+      transform: rotateZ(360deg);
       transition: transform ease 0.1s;
     }
   }
@@ -139,9 +140,9 @@ const HomePage = () => {
 
   const apiUrl: string | null =
     !areRatesUpToDate(ratesData) &&
-    process.env.API_URL &&
-    process.env.API_URL.length > 0
-      ? (process.env.API_URL as string)
+    process.env.NEXT_PUBLIC_API_URL &&
+    process.env.NEXT_PUBLIC_API_URL.length > 0
+      ? (process.env.NEXT_PUBLIC_API_URL as string)
       : null
 
   let { data, error } = useSWR(apiUrl, {
@@ -284,6 +285,7 @@ const HomePage = () => {
 
   return (
     <>
+      <SEO title="Neuconv" />
       <Layout>
         <DivConverterWrapper>
           <div>
