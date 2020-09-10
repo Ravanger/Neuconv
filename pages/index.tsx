@@ -24,14 +24,18 @@ const DivConverterWrapper = styled.div`
     display: flex;
     flex-direction: column;
     justify-content: center;
-    margin: 1rem;
-    margin-right: 0;
+    margin: 1rem 0.25rem 1rem 2.25rem;
 
     > div {
       flex-direction: row;
+      align-items: center;
       border-radius: 0.75rem;
-      box-shadow: inset 0.5rem 0.5rem 0.5rem #e6e6e6,
-        inset -0.5rem -0.5rem 0.5rem #ffffff;
+      box-shadow: inset 0.25em 0.25em 0.5em #d1d9e6,
+        inset calc(-1 * 0.25em) calc(-1 * 0.25em) 0.5em #ffffff; /* ie */
+      box-shadow: inset var(--radius-size) var(--radius-size) var(--blur-size)
+          var(--color-shadow),
+        inset calc(-1 * var(--radius-size)) calc(-1 * var(--radius-size))
+          var(--blur-size) var(--color-hightlight);
       padding: 0.25rem;
       padding-right: 0;
     }
@@ -42,8 +46,8 @@ const DivConverterWrapper = styled.div`
   span {
     border: none;
     text-align: left;
-    padding-top: 1em;
-    padding-bottom: 1em;
+    padding: 1em;
+    padding-left: 0;
     background: none;
   }
 
@@ -60,12 +64,26 @@ const DivConverterWrapper = styled.div`
     width: 33%;
     border: none;
     border-radius: 0.75rem;
-    appearance: menulist-button;
+    outline: none;
+    appearance: none;
+    cursor: pointer;
     text-align: right;
-    box-shadow: 0.25rem 0.25rem 0.25rem #e6e6e6,
-      -0.25rem -0.25rem 0.25rem #ffffff;
+    box-shadow: 0.25em 0.25em 0.5em #d1d9e6,
+      calc(-1 * 0.25em) calc(-1 * 0.25em) 0.5em #ffffff; /* ie */
+    box-shadow: var(--radius-size) var(--radius-size) var(--blur-size)
+        var(--color-shadow),
+      calc(-1 * var(--radius-size)) calc(-1 * var(--radius-size))
+        var(--blur-size) var(--color-hightlight);
     width: fit-content;
     height: fit-content;
+    color: #ffffff;
+    padding-right: 0.8rem;
+    background-color: #9567f1;
+    background-color: var(--color-accent);
+    background-image: url("./triangle.svg");
+    background-repeat: no-repeat;
+    background-size: 18%;
+    background-position: 90% center;
   }
 
   option {
@@ -79,19 +97,30 @@ const DivConverterWrapper = styled.div`
     cursor: pointer;
     background: none;
     border: none;
-    transition: transform ease 0.2s;
+    transition: transform 0.1s;
     outline: none;
     border-radius: 0.75rem;
-    box-shadow: 0.25rem 0.25rem 0.25rem #e6e6e6,
-      -0.25rem -0.25rem 0.25rem #ffffff;
+    box-shadow: 0.25em 0.25em 0.5em #d1d9e6,
+      calc(-1 * 0.25em) calc(-1 * 0.25em) 0.5em #ffffff; /* ie */
+    box-shadow: var(--radius-size) var(--radius-size) var(--blur-size)
+        var(--color-shadow),
+      calc(-1 * var(--radius-size)) calc(-1 * var(--radius-size))
+        var(--blur-size) var(--color-hightlight);
+    margin-right: 1rem;
 
     &:hover {
-      transform: rotateX(180deg);
+      transform: scale(1.1);
     }
 
     &:active {
-      transform: rotateX(360deg);
-      transition: transform ease 0.1s;
+      box-shadow: inset 0.25em 0.25em 0.5em #d1d9e6,
+        inset calc(-1 * 0.25em) calc(-1 * 0.25em) 0.5em #ffffff; /* ie */
+      box-shadow: inset var(--radius-size) var(--radius-size) var(--blur-size)
+          var(--color-shadow),
+        inset calc(-1 * var(--radius-size)) calc(-1 * var(--radius-size))
+          var(--blur-size) var(--color-hightlight);
+      transform: scale(1);
+      transition: transform 0s;
     }
   }
 

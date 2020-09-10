@@ -1,0 +1,8 @@
+:root {
+  --color-bg: #ecf0f3;
+  --color-shadow: #d1d9e6;
+  --color-hightlight: #ffffff;
+  --color-accent: #9567f1;
+  --radius-size: 0.25em;
+  --blur-size: 0.5em;
+}
