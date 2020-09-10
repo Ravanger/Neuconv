@@ -1,4 +1,3 @@
-// TODO: Format output with commas
 // TODO: Add ads
 // TODO: Manifest and PWA, icon
 // TODO: Dropbox open animation
@@ -171,6 +170,10 @@ const FooterBottom = styled.footer`
   color: hsla(0, 0%, 0%, 0.6);
 `
 
+const formatNumberWithSeperators = (num: number) => {
+  return num.toFixed(2).replace(/(\d)(?=(\d{3})+(?!\d))/g, "$1,")
+}
+
 const HomePage = ({ ratesData }: any) => {
   type StateTypesValues = {
     convertFromValue: number | string | undefined
@@ -211,13 +214,13 @@ const HomePage = ({ ratesData }: any) => {
   ): void => {
     setStateConvertValues({
       convertFromValue: event.target.value,
-      convertToValue: (
+      convertToValue: formatNumberWithSeperators(
         Math.round(
           (+event.target.value / stateFromValueMultiplier) *
             stateToValueMultiplier *
             100
         ) / 100
-      ).toFixed(2),
+      ),
     })
   }
 
@@ -242,20 +245,18 @@ const HomePage = ({ ratesData }: any) => {
         setStateFromValueMultiplier(valueMultiplier)
         setStateConvertValues({
           ...stateConvertValues,
-          convertToValue: (
-            (convertFromValue / valueMultiplier) *
-            stateToValueMultiplier
-          ).toFixed(2),
+          convertToValue: formatNumberWithSeperators(
+            (convertFromValue / valueMultiplier) * stateToValueMultiplier
+          ),
         })
         break
       case "convertToCurrency":
         setStateToValueMultiplier(valueMultiplier)
         setStateConvertValues({
           ...stateConvertValues,
-          convertToValue: (
-            (convertFromValue / stateFromValueMultiplier) *
-            valueMultiplier
-          ).toFixed(2),
+          convertToValue: formatNumberWithSeperators(
+            (convertFromValue / stateFromValueMultiplier) * valueMultiplier
+          ),
         })
         break
       default:
@@ -282,11 +283,11 @@ const HomePage = ({ ratesData }: any) => {
 
     setStateConvertValues({
       ...stateConvertValues,
-      convertToValue: (
+      convertToValue: formatNumberWithSeperators(
         Math.round(
           (convertFromValue / prevToMultiplier) * prevFromMultiplier * 100
         ) / 100
-      ).toFixed(2),
+      ),
     })
   }
 
