@@ -114,7 +114,7 @@ const DivConverterWrapper = styled.div`
 
   button {
     font-family: Arial, Helvetica, sans-serif;
-    font-size: 1.2rem;
+    font-size: 1.4rem;
     color: #9567f1;
     color: var(--color-accent);
     line-height: 1;
