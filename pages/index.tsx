@@ -96,6 +96,7 @@ const DivConverterWrapper = styled.div`
     height: 2rem;
     width: 2rem;
     border: none;
+    background: none;
     background-image: url("./arrows.svg");
     background-repeat: no-repeat;
     background-size: 100%;
