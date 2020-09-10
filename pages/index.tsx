@@ -2,6 +2,7 @@
 // TODO: Add ads
 // TODO: Manifest and PWA, icon
 // TODO: Dropbox open animation
+// TODO: Backend scraper
 
 import { useState } from "react"
 import styled from "@emotion/styled"
@@ -82,7 +83,7 @@ const DivConverterWrapper = styled.div`
     padding-left: 0.3rem;
     background-color: #9567f1; /* ie */
     background-color: var(--color-accent);
-    background-image: url("./triangle.svg");
+    background-image: url("data:image/svg+xml;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHZpZXdCb3g9IjAgMCA0MCAzMCI+DQogIDxwb2x5Z29uIHBvaW50cz0iMCAwIDQwIDAgMjAgMzAiIGZpbGw9IiNmZmYiLz4NCjwvc3ZnPg==");
     background-repeat: no-repeat;
     background-size: 18%;
     background-position: 85% center;
@@ -97,7 +98,7 @@ const DivConverterWrapper = styled.div`
     width: 2rem;
     border: none;
     background: none;
-    background-image: url("./arrows.svg");
+    background-image: url("data:image/svg+xml;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHZpZXdCb3g9IjAgMCAzMS44NyAxOC4yNCI+DQogICAgPGRlZnM+DQogICAgICAgIDxzdHlsZT4uY2xzLTF7ZmlsbDojOTU2N2YxO308L3N0eWxlPg0KICAgIDwvZGVmcz4NCiAgICA8cGF0aCBjbGFzcz0iY2xzLTEiIGQ9Ik0zMS43OSwxMi4zNCwyOCwxOGEuNS41LDAsMCwxLS40Mi4yMy41Mi41MiwwLDAsMS0uNDItLjIzbC0zLjc2LTUuNjdhLjUuNSwwLDEsMSwuODMtLjU2bDIuODUsNC4zVi41YS41LjUsMCwwLDEsMSwwVjE2LjA4TDMxLDExLjc4YS41LjUsMCwxLDEsLjgzLjU2WiIvPg0KICAgIDxwYXRoIGNsYXNzPSJjbHMtMSIgZD0iTTguNDUsNS45YS41LjUsMCwwLDEtLjE0LjdBLjUzLjUzLDAsMCwxLDgsNi42OGEuNTEuNTEsMCwwLDEtLjQyLS4yMkw0Ljc3LDIuMTZWMTcuNzRhLjUuNSwwLDAsMS0xLDBWMi4xNkwuOTIsNi40NkEuNS41LDAsMSwxLC4wOSw1LjlMMy44NS4yM2EuNTMuNTMsMCwwLDEsLjg0LDBaIi8+DQo8L3N2Zz4NCg==");
     background-repeat: no-repeat;
     background-size: 100%;
     padding: 0.3rem;
