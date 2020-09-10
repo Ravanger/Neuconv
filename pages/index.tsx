@@ -83,10 +83,22 @@ const DivConverterWrapper = styled.div`
     padding-left: 0.3rem;
     background-color: #9567f1; /* ie */
     background-color: var(--color-accent);
-    background-image: url("data:image/svg+xml;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHZpZXdCb3g9IjAgMCA0MCAzMCI+DQogIDxwb2x5Z29uIHBvaW50cz0iMCAwIDQwIDAgMjAgMzAiIGZpbGw9IiNmZmYiLz4NCjwvc3ZnPg==");
-    background-repeat: no-repeat;
-    background-size: 18%;
-    background-position: 85% center;
+  }
+
+  label {
+    position: relative;
+    display: flex;
+    align-items: center;
+    justify-content: end;
+
+    &::after {
+      content: "▾";
+      font-family: Arial, Helvetica, sans-serif;
+      color: var(--color-hightlight);
+      font-size: 1.75rem;
+      position: absolute;
+      pointer-events: none;
+    }
   }
 
   option {
@@ -94,16 +106,15 @@ const DivConverterWrapper = styled.div`
   }
 
   button {
+    font-family: Arial, Helvetica, sans-serif;
+    font-size: 1.2rem;
+    color: var(--color-accent);
+    line-height: 1;
     height: 2rem;
     width: 2rem;
     border: none;
     background: none;
-    background-image: url("data:image/svg+xml;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHZpZXdCb3g9IjAgMCAzMS44NyAxOC4yNCI+DQogICAgPGRlZnM+DQogICAgICAgIDxzdHlsZT4uY2xzLTF7ZmlsbDojOTU2N2YxO308L3N0eWxlPg0KICAgIDwvZGVmcz4NCiAgICA8cGF0aCBjbGFzcz0iY2xzLTEiIGQ9Ik0zMS43OSwxMi4zNCwyOCwxOGEuNS41LDAsMCwxLS40Mi4yMy41Mi41MiwwLDAsMS0uNDItLjIzbC0zLjc2LTUuNjdhLjUuNSwwLDEsMSwuODMtLjU2bDIuODUsNC4zVi41YS41LjUsMCwwLDEsMSwwVjE2LjA4TDMxLDExLjc4YS41LjUsMCwxLDEsLjgzLjU2WiIvPg0KICAgIDxwYXRoIGNsYXNzPSJjbHMtMSIgZD0iTTguNDUsNS45YS41LjUsMCwwLDEtLjE0LjdBLjUzLjUzLDAsMCwxLDgsNi42OGEuNTEuNTEsMCwwLDEtLjQyLS4yMkw0Ljc3LDIuMTZWMTcuNzRhLjUuNSwwLDAsMS0xLDBWMi4xNkwuOTIsNi40NkEuNS41LDAsMSwxLC4wOSw1LjlMMy44NS4yM2EuNTMuNTMsMCwwLDEsLjg0LDBaIi8+DQo8L3N2Zz4NCg==");
-    background-repeat: no-repeat;
-    background-size: 100%;
-    padding: 0.3rem;
-    background-position: center center;
-    background-origin: content-box;
+    padding: 0;
     cursor: pointer;
     transition: transform 0.1s;
     outline: none;
@@ -307,26 +318,32 @@ const HomePage = ({ ratesData }: any) => {
                   onChange={handleInputChange}
                 />
               </span>
-              <Select
-                name="convertFromCurrency"
-                id="convertFromCurrency"
-                currencynamesarray={currencyNamesArray}
-                value={stateConvertSelections.convertFromCurrency}
-                onChange={handleSelectChange}
-              />
+              <label>
+                <Select
+                  name="convertFromCurrency"
+                  id="convertFromCurrency"
+                  currencynamesarray={currencyNamesArray}
+                  value={stateConvertSelections.convertFromCurrency}
+                  onChange={handleSelectChange}
+                />
+              </label>
             </div>
             <div>
               <span>{stateConvertValues.convertToValue}</span>
-              <Select
-                name="convertToCurrency"
-                id="convertToCurrency"
-                currencynamesarray={currencyNamesArray}
-                value={stateConvertSelections.convertToCurrency}
-                onChange={handleSelectChange}
-              />
+              <label>
+                <Select
+                  name="convertToCurrency"
+                  id="convertToCurrency"
+                  currencynamesarray={currencyNamesArray}
+                  value={stateConvertSelections.convertToCurrency}
+                  onChange={handleSelectChange}
+                />
+              </label>
             </div>
           </div>
-          <button onClick={switchCurrencies} aria-label="Switch currencies" />
+          <button onClick={switchCurrencies} aria-label="Switch currencies">
+            ⇅
+          </button>
         </DivConverterWrapper>
         <PRoundedUp>* rounded up to nearest centesimal</PRoundedUp>
       </Layout>
