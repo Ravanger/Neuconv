@@ -48,6 +48,9 @@ const DivConverterWrapper = styled.div`
     padding: 1em;
     padding-left: 0;
     background: none;
+    color: #9567f1;
+    color: var(--color-accent);
+    font-size: 0.8rem;
   }
 
   input,
@@ -66,7 +69,6 @@ const DivConverterWrapper = styled.div`
     outline: none;
     appearance: none;
     cursor: pointer;
-    text-align: right;
     box-shadow: 0.25em 0.25em 0.5em #d1d9e6,
       calc(-1 * 0.25em) calc(-1 * 0.25em) 0.5em #ffffff; /* ie */
     box-shadow: var(--radius-size) var(--radius-size) var(--blur-size)
@@ -77,12 +79,13 @@ const DivConverterWrapper = styled.div`
     height: fit-content;
     color: #ffffff;
     padding-right: 0.8rem;
+    padding-left: 0.3rem;
     background-color: #9567f1; /* ie */
     background-color: var(--color-accent);
     background-image: url("./triangle.svg");
     background-repeat: no-repeat;
     background-size: 18%;
-    background-position: 90% center;
+    background-position: 85% center;
   }
 
   option {
@@ -127,6 +130,10 @@ const DivConverterWrapper = styled.div`
     }
   }
 
+  .topSpanWrapper {
+    padding: 0;
+  }
+
   @media (max-width: 12rem) {
     * {
       font-size: 80%;
@@ -136,6 +143,7 @@ const DivConverterWrapper = styled.div`
 
 const PRoundedUp = styled.p`
   text-align: center;
+  color: hsla(0, 0%, 0%, 0.6);
 `
 
 const FooterBottom = styled.footer`
@@ -145,6 +153,7 @@ const FooterBottom = styled.footer`
   text-align: center;
   padding: 1em;
   font-size: 0.8rem;
+  color: hsla(0, 0%, 0%, 0.6);
 `
 
 const HomePage = ({ ratesData }: any) => {
@@ -288,12 +297,14 @@ const HomePage = ({ ratesData }: any) => {
         <DivConverterWrapper>
           <div>
             <div>
-              <Input
-                value={stateConvertValues.convertFromValue}
-                name="convertFromValue"
-                id="convertFromValue"
-                onChange={handleInputChange}
-              />
+              <span className="topSpanWrapper">
+                <Input
+                  value={stateConvertValues.convertFromValue}
+                  name="convertFromValue"
+                  id="convertFromValue"
+                  onChange={handleInputChange}
+                />
+              </span>
               <Select
                 name="convertFromCurrency"
                 id="convertFromCurrency"
