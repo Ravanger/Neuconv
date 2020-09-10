@@ -98,8 +98,8 @@ const DivConverterWrapper = styled.div`
       font-family: Arial, Helvetica, sans-serif;
       color: #ffffff;
       color: var(--color-hightlight);
-      left: 2rem;
-      top: 0.6rem;
+      right: 0.2em;
+      top: 0.4em;
       font-size: 1.5rem;
       position: absolute;
       pointer-events: none;
