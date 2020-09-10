@@ -9,6 +9,7 @@ const MainWrapper = styled.main`
   height: 100vh;
   width: 100vw;
   overflow: hidden;
+  background: #ecf0f3; /* ie */
   background: var(--color-bg);
 `
 
