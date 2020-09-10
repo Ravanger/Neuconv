@@ -57,14 +57,14 @@ const DivConverterWrapper = styled.div`
   input,
   span {
     padding-left: 1em;
-    width: 67%;
+    width: 75%;
     border-right: none;
     border-radius: 0.75rem 0 0 0.75rem;
     line-height: 1.6;
   }
 
   select {
-    width: 33%;
+    width: 100%;
     border: none;
     border-radius: 0.75rem;
     outline: none;
@@ -76,26 +76,33 @@ const DivConverterWrapper = styled.div`
         var(--color-shadow),
       calc(-1 * var(--radius-size)) calc(-1 * var(--radius-size))
         var(--blur-size) var(--color-hightlight);
-    width: fit-content;
-    height: fit-content;
     color: #ffffff;
     padding-right: 0.8rem;
     padding-left: 0.3rem;
     background-color: #9567f1; /* ie */
     background-color: var(--color-accent);
+
+    &::-ms-expand {
+      display: none;
+    }
   }
 
   label {
     position: relative;
     display: flex;
     align-items: center;
-    justify-content: end;
+    justify-content: center;
+    width: 25%;
+    min-width: 4em;
 
     &::after {
       content: "▾";
       font-family: Arial, Helvetica, sans-serif;
+      color: #ffffff;
       color: var(--color-hightlight);
-      font-size: 1.75rem;
+      left: 2rem;
+      top: 0.6rem;
+      font-size: 1.5rem;
       position: absolute;
       pointer-events: none;
     }
@@ -108,6 +115,7 @@ const DivConverterWrapper = styled.div`
   button {
     font-family: Arial, Helvetica, sans-serif;
     font-size: 1.2rem;
+    color: #9567f1;
     color: var(--color-accent);
     line-height: 1;
     height: 2rem;
@@ -145,12 +153,6 @@ const DivConverterWrapper = styled.div`
 
   .topSpanWrapper {
     padding: 0;
-  }
-
-  @media (max-width: 12rem) {
-    * {
-      font-size: 80%;
-    }
   }
 `
 
