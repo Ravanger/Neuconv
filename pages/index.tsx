@@ -1,6 +1,5 @@
 // TODO: Add ads
-// TODO: Manifest and PWA, icon
-// TODO: Dropbox open animation
+// TODO: Icons (144px, 512px png)
 // TODO: Backend scraper
 
 import { useState } from "react"
