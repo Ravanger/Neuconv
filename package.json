@@ -15,7 +15,6 @@
     "next": "9.5.2",
     "react": "16.13.1",
     "react-dom": "16.13.1",
-    "react-icons": "^3.11.0",
     "react-text-mask": "^5.4.3",
     "text-mask-addons": "^3.8.0"
   },

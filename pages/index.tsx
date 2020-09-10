@@ -1,11 +1,10 @@
 // TODO: Format output with commas
 // TODO: Add ads
-// TODO: Manifest and PWA
-// TODO: Nick's design
+// TODO: Manifest and PWA, icon
+// TODO: Dropbox open animation
 
 import { useState } from "react"
 import styled from "@emotion/styled"
-import { TiArrowSync } from "react-icons/ti"
 import { GetStaticProps } from "next"
 
 import Layout from "@components/Layout"
@@ -78,7 +77,7 @@ const DivConverterWrapper = styled.div`
     height: fit-content;
     color: #ffffff;
     padding-right: 0.8rem;
-    background-color: #9567f1;
+    background-color: #9567f1; /* ie */
     background-color: var(--color-accent);
     background-image: url("./triangle.svg");
     background-repeat: no-repeat;
@@ -91,12 +90,16 @@ const DivConverterWrapper = styled.div`
   }
 
   button {
-    display: flex;
-    font-size: 2rem;
-    padding: 0;
-    cursor: pointer;
-    background: none;
+    height: 2rem;
+    width: 2rem;
     border: none;
+    background-image: url("./arrows.svg");
+    background-repeat: no-repeat;
+    background-size: 100%;
+    padding: 0.3rem;
+    background-position: center center;
+    background-origin: content-box;
+    cursor: pointer;
     transition: transform 0.1s;
     outline: none;
     border-radius: 0.75rem;
@@ -310,9 +313,7 @@ const HomePage = ({ ratesData }: any) => {
               />
             </div>
           </div>
-          <button onClick={switchCurrencies} aria-label="Switch currencies">
-            <TiArrowSync />
-          </button>
+          <button onClick={switchCurrencies} aria-label="Switch currencies" />
         </DivConverterWrapper>
         <PRoundedUp>* rounded up to nearest centesimal</PRoundedUp>
       </Layout>
