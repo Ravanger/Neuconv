@@ -1,5 +1,4 @@
 // TODO: Add ads
-// TODO: Icons (144px, 512px png)
 // TODO: Backend scraper
 
 import { useState } from "react"

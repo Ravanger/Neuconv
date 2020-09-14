@@ -4,19 +4,20 @@
   "description": "A minimalistic currency converter",
   "icons": [
     {
-      "src": "/big_icon.png",
+      "src": "/android-chrome-192x192.png",
+      "sizes": "192x192",
       "type": "image/png",
-      "sizes": "512x512"
+      "purpose": "any maskable"
     },
     {
-      "src": "/small_icon.png",
+      "src": "/android-chrome-512x512.png",
+      "sizes": "512x512",
       "type": "image/png",
-      "sizes": "192x192"
+      "purpose": "any maskable"
     }
   ],
   "theme_color": "#9567f1",
   "background_color": "#ecf0f3",
   "start_url": "/",
-  "display": "fullscreen",
-  "orientation": "portrait"
+  "display": "fullscreen"
 }

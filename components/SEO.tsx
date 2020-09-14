@@ -33,7 +33,7 @@ const SEO: React.FC<PropTypes> = (props) => {
   return (
     <Head>
       <title>{title}</title>
-      <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+      <meta httpEquiv="Content-Type" content="text/html; charset=UTF-8" />
       <meta name="viewport" content="initial-scale=1, width=device-width" />
       <meta name="description" content={description} />
       <meta name="keywords" content={keywords} />
@@ -42,7 +42,6 @@ const SEO: React.FC<PropTypes> = (props) => {
       <meta name="apple-mobile-web-app-capable" content="yes" />
       <meta name="apple-mobile-web-app-status-bar-style" content="default" />
       <meta name="apple-mobile-web-app-title" content={title} />{" "}
-      <link rel="apple-touch-icon" href="/favicon.ico" />
       <meta property="og:title" content={title} />
       <meta property="og:description" content={description} />
       <meta property="og:type" content="website" />
@@ -55,7 +54,27 @@ const SEO: React.FC<PropTypes> = (props) => {
       <meta property="twitter:image" content={imageUrl} />
       <link rel="canonical" href={pageUrl} />
       <link rel="manifest" href="/manifest.webmanifest" />
-      <link rel="shortcut icon" href="/favicon.ico" />
+      <link
+        rel="apple-touch-icon"
+        sizes="180x180"
+        href="/apple-touch-icon.png"
+      />
+      <link
+        rel="icon"
+        type="image/png"
+        sizes="32x32"
+        href="/favicon-32x32.png"
+      />
+      <link
+        rel="icon"
+        type="image/png"
+        sizes="16x16"
+        href="/favicon-16x16.png"
+      />
+      <link rel="mask-icon" href="/safari-pinned-tab.svg" color={themecolor} />
+      <meta name="apple-mobile-web-app-title" content={title} />
+      <meta name="application-name" content={title} />
+      <meta name="msapplication-TileColor" content="#ecf0f3" />
     </Head>
   )
 }
