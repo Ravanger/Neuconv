@@ -1,5 +1,4 @@
 // TODO: Add ads
-// TODO: Backend scraper
 
 import { useState } from "react"
 import styled from "@emotion/styled"
