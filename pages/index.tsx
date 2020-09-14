@@ -305,7 +305,7 @@ const HomePage = ({ ratesData }: any) => {
         description="A minimalistic currency converter"
         keywords="Minimalistic,currency,converter,money,exchange,finance"
         author="Boris Rossovsky"
-        pageUrl="https://currency-converter.ravanger.vercel.app"
+        pageUrl="https://neuconv.ravanger.vercel.app"
         themecolor="#9567f1"
       />
       <Layout>

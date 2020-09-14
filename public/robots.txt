@@ -1,4 +1,4 @@
 User-agent: *
 Allow: /*
 Disallow: /404
-Sitemap: https://currency-converter.ravanger.vercel.app/sitemap.xml
+Sitemap: https://neuconv.ravanger.vercel.app/sitemap.xml
