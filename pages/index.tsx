@@ -9,6 +9,8 @@ import Input from "@components/Input"
 import Select from "@components/Select"
 import SEO from "@components/SEO"
 
+import { fetchLatest } from "@api/latest"
+
 const DivConverterWrapper = styled.div`
   display: flex;
   justify-content: center;
@@ -358,21 +360,12 @@ const HomePage = ({ ratesData }: any) => {
 }
 
 export const getStaticProps: GetStaticProps = async () => {
-  if (process.env.NEXT_PUBLIC_API_URL) {
-    const res = await fetch(process.env.NEXT_PUBLIC_API_URL)
-    const ratesData = await res.json()
-
-    return {
-      props: {
-        ratesData,
-      },
-      revalidate: 86400, // 24 hours in seconds
-    }
-  }
-
+  const ratesData = await fetchLatest()
   return {
-    props: {},
-    revalidate: false,
+    props: {
+      ratesData,
+    },
+    revalidate: 43200, // 12 hours in seconds
   }
 }
 

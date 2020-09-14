@@ -12,10 +12,14 @@ type ResponseData = {
   error?: any
 }
 
-const fetchLatest = async (
-  req: NextApiRequest,
-  res: NextApiResponse<ResponseData>
-) => {
+export const fetchLatest = async () => {
+  let returnVal: ResponseData = {
+    date: "00-00-00",
+    base: "ERR",
+    rates: {},
+    error: "Internal error occurred",
+  }
+
   await fetch(API_URL)
     .then((response) => response.text())
     .then((xml) => {
@@ -34,19 +38,25 @@ const fetchLatest = async (
             output.rates[data.$.currency] = parseFloat(data.$.rate)
           })
 
-          res.status(200).json(output)
+          returnVal = output
         }
       })
     })
     .catch((err) => {
       console.error(err)
-      res.status(500).send({
-        date: "00-00-00",
-        base: "ERR",
-        rates: {},
-        error: "Internal error occurred",
-      })
     })
+
+  return returnVal
 }
 
-export default fetchLatest
+export default async (
+  req: NextApiRequest,
+  res: NextApiResponse<ResponseData>
+) => {
+  try {
+    const data: ResponseData = await fetchLatest()
+    res.status(200).json(data)
+  } catch (err) {
+    res.status(500).json(err)
+  }
+}
