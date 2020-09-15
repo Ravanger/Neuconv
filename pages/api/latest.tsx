@@ -57,6 +57,6 @@ export default async (
     const data: ResponseData = await fetchLatest()
     res.status(200).json(data)
   } catch (err) {
-    res.status(500).json(err)
+    res.status(500).send(err)
   }
 }
