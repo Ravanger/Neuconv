@@ -350,7 +350,7 @@ const HomePage = ({ ratesData }: any) => {
       </Layout>
       <FooterBottom>
         <time dateTime={lastUpdatedDate.toISOString()}>
-          API last updated on {lastUpdatedDate.toDateString()}
+          Last updated: {lastUpdatedDate.toLocaleString()}
         </time>
       </FooterBottom>
     </>
