@@ -1,5 +1,3 @@
-// TODO: Add ads
-
 import { useState } from "react"
 import styled from "@emotion/styled"
 import { GetStaticProps } from "next"
