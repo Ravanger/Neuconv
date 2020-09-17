@@ -4,3 +4,9 @@
 body {
   font-family: Lato, Arial, Helvetica, sans-serif;
 }
+
+html,
+body,
+#__next {
+  height: 100%;
+}

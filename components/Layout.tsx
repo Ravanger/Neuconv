@@ -6,7 +6,7 @@ const MainWrapper = styled.main`
   flex-direction: column;
   align-items: center;
   justify-content: center;
-  height: 100vh;
+  height: 100%;
   width: 100vw;
   overflow: hidden;
   background: #ecf0f3; /* ie */
