@@ -160,9 +160,9 @@ const PRoundedUp = styled.p`
 const FooterBottom = styled.footer`
   position: absolute;
   bottom: 0;
-  width: 100vw;
+  width: 100%;
   text-align: center;
-  padding: 1em;
+  padding: 1em 0;
   font-size: 0.8rem;
   color: hsla(0, 0%, 0%, 0.6);
 `

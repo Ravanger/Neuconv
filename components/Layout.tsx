@@ -7,7 +7,7 @@ const MainWrapper = styled.main`
   align-items: center;
   justify-content: center;
   height: 100%;
-  width: 100vw;
+  width: 100%;
   overflow: hidden;
   background: #ecf0f3; /* ie */
   background: var(--color-bg);
