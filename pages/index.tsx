@@ -1,4 +1,4 @@
-import { useState } from "react"
+import { useState, ChangeEvent } from "react"
 import styled from "@emotion/styled"
 import { GetStaticProps } from "next"
 
@@ -206,9 +206,7 @@ const HomePage = ({ ratesData }: any) => {
   currencyNamesArray && currencyNamesArray.push([ratesData.base, 1]) //Add base
   currencyNamesArray && currencyNamesArray.sort()
 
-  const handleInputChange = (
-    event: React.ChangeEvent<HTMLInputElement>
-  ): void => {
+  const handleInputChange = (event: ChangeEvent<HTMLInputElement>): void => {
     setStateConvertValues({
       convertFromValue: event.target.value,
       convertToValue: formatNumberWithSeperators(
@@ -221,9 +219,7 @@ const HomePage = ({ ratesData }: any) => {
     })
   }
 
-  const handleSelectChange = (
-    event: React.ChangeEvent<HTMLSelectElement>
-  ): void => {
+  const handleSelectChange = (event: ChangeEvent<HTMLSelectElement>): void => {
     setStateConvertSelections({
       ...stateConvertSelections,
       [event.target.name]: event.target.value,

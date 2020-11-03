@@ -1,11 +1,11 @@
-import React from "react"
+import { ChangeEvent } from "react"
 import MaskedInput from "react-text-mask"
 import createNumberMask from "text-mask-addons/dist/createNumberMask"
 
 type InputProps = {
   value: number | string | undefined
   name: string
-  onChange?: (event: React.ChangeEvent<HTMLInputElement>) => void
+  onChange?: (event: ChangeEvent<HTMLInputElement>) => void
   id?: string
 }
 

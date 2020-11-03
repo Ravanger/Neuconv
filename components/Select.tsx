@@ -1,11 +1,11 @@
-import React from "react"
+import { ChangeEvent } from "react"
 
 type SelectProps = {
   name: string
   id?: string
   value: string | undefined
   currencynamesarray: [string, number][]
-  onChange?: (event: React.ChangeEvent<HTMLSelectElement>) => void
+  onChange?: (event: ChangeEvent<HTMLSelectElement>) => void
 }
 
 const Select = (props: SelectProps) => {

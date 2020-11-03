@@ -1,4 +1,4 @@
-import React from "react"
+import { ReactNode } from "react"
 import styled from "@emotion/styled"
 
 const MainWrapper = styled.main`
@@ -14,7 +14,7 @@ const MainWrapper = styled.main`
 `
 
 type LayoutProps = {
-  children: React.ReactNode
+  children: ReactNode
 }
 
 const Layout = (props: LayoutProps) => (

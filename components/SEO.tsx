@@ -1,7 +1,7 @@
-import React from "react"
+import { FC } from "react"
 import Head from "next/head"
 
-type PropTypes = {
+type SEOPropTypes = {
   title: string
   author?: string
   description?: string
@@ -19,7 +19,7 @@ const defaultProps = {
   imageUrl: "",
 }
 
-const SEO: React.FC<PropTypes> = (props) => {
+const SEO: FC<SEOPropTypes> = (props) => {
   const {
     author,
     description,
